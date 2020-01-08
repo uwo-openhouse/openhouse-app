@@ -1,14 +1,28 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
+import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import CustomHeader from "../components/CustomHeader";
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  return <ExpoConfigView />;
+class SettingsScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Settings',
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require('../assets/images/robot-dev.png')}
+        style={{width: 50, height: 50}}
+      />
+    ),
+  };
+
+  render() {
+    return (
+      <View>
+        <CustomHeader navigation={this.props.navigation} title="Settings" />
+        <Text>This is Settings Screen</Text>
+      </View>
+    );
+  }
 }
 
-SettingsScreen.navigationOptions = {
-  title: 'app.json',
-};
+
+export default SettingsScreen;
