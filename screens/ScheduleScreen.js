@@ -1,6 +1,7 @@
 import React from 'react';
 import { View,Text, ScrollView, Image, StyleSheet } from 'react-native';
 import CustomHeader from "../components/CustomHeader";
+import ScheduleList from "../components/ScheduleList";
 
 
 class ScheduleScreen extends React.Component {
@@ -16,10 +17,10 @@ class ScheduleScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <View style={{flex: 1}}>
         <CustomHeader navigation={this.props.navigation} title="Schedule" />
-        <Text>This is Schedule Screen</Text>
-      </ScrollView>
+        <ScheduleList/>
+      </View>
     );
   }
 }
