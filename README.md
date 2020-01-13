@@ -5,6 +5,7 @@ Mobile app for The University of Westerns Open House Event.
 - EXPO
 - React Native
 - React Native Navigation
+- React Native Elements (for styling)
 
 
 
