@@ -81,7 +81,7 @@ function Item({ title }) {
 
 export default function ScheduleList() {
   return (
-    <SafeAreaView  style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}

@@ -17,7 +17,7 @@ class ScheduleScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
         <CustomHeader navigation={this.props.navigation} title="Schedule" />
         <ScheduleList/>
       </View>
