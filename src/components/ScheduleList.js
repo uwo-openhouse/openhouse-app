@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   SectionList,
+  TouchableHighlight,
 } from 'react-native';
 import Colors from "../constants/Colors"
 
@@ -73,25 +74,31 @@ const DATA = [{
 
 function Item({ title }) {
     return (
-      <View style={styles.item}>
+      <View style={{marginVertical: 5}}>
+        <TouchableHighlight underlayColor="black" onPress={()=> { console.log('Clicked!');}}> 
+          <View style={styles.item}>
 
-        <View style={styles.timeContainer}>
-          <Text style={styles.time}>{title}</Text>
-        </View>
+            <View style={styles.timeContainer}>
+              <Text style={styles.time}>{title}</Text>
+            </View>
 
-        <View style={styles.itemContentContainer}>
-          <View style={styles.titleContainer}>
-            <View style={styles.categoryDot}></View>
-            <Text style={styles.title}>{title}</Text>
+            <View style={styles.itemContentContainer}>
+              <View style={styles.titleContainer}>
+                <View style={styles.categoryDot}></View>
+                <Text style={styles.title}>{title}</Text>
+              </View>
+              <Text style={styles.location}>{title}</Text>
+            </View>
+
           </View>
-          <Text style={styles.location}>{title}</Text>
-        </View>
-
+        </TouchableHighlight>
       </View>
     );
   }
 
 export default function ScheduleList() {
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
@@ -117,7 +124,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#ffffff',
     padding: 15,
-    marginVertical: 5,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   header: {
     fontSize: 20,
