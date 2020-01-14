@@ -30,7 +30,7 @@ export default ScheduleScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
+    paddingTop: 0,
+    backgroundColor: '#E5E5E5',
   },
 });
