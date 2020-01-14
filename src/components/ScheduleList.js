@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   SectionList,
 } from 'react-native';
-
+import Colors from "../constants/Colors"
 
 const DATA = [{
   title: '8:00 AM',
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   title: {
     flexGrow: 1,
     fontSize: 24,
-    color: '#4f2683',
+    color: Colors.WesternPurple,
   },
   titleContainer: {
     display: 'flex',
