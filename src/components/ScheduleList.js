@@ -74,7 +74,19 @@ const DATA = [{
 function Item({ title }) {
     return (
       <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+
+        <View style={styles.timeContainer}>
+          <Text style={styles.time}>{title}</Text>
+        </View>
+
+        <View style={styles.itemContentContainer}>
+          <View style={styles.titleContainer}>
+            <View style={styles.categoryDot}></View>
+            <Text style={styles.title}>{title}</Text>
+          </View>
+          <Text style={styles.location}>{title}</Text>
+        </View>
+
       </View>
     );
   }
@@ -101,14 +113,56 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
   },
   item: {
-    backgroundColor: '#f9c2ff',
-    padding: 25,
-    marginVertical: 8,
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+    padding: 15,
+    marginVertical: 5,
   },
   header: {
-    fontSize: 32,
+    fontSize: 20,
+    opacity: 0.5,
+    marginHorizontal: 10,
+    marginTop: 10,
   },
+
   title: {
+    flexGrow: 1,
     fontSize: 24,
+    color: '#4f2683',
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+
+  },
+  itemContentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    flex: 1,
+
+  },
+  time: {
+    color:'#999999'
+  },
+  timeContainer: {
+    marginRight: 8,
+    width: 55,
+  },
+
+  location: {
+    fontSize: 18,
+    color: '#666666',
+  },
+  categoryDot:{
+    flexGrow: 0,
+    flexShrink: 0,
+    top: 8,
+    marginRight: 8,
+    width: 16,
+    height: 16,
+    borderRadius: 16/2,
+    backgroundColor: 'red'
   },
 });
