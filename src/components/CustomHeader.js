@@ -14,7 +14,7 @@ const CustomHeader = props => {
       }}
       statusBarProps={{ barStyle: "light-content" }}
       containerStyle={{
-        //backgroundColor: Colors.WesternPurple,
+        backgroundColor: Colors.WesternPurple,
       }}
     />
   );

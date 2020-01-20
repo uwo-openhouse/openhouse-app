@@ -5,6 +5,7 @@ import {
   View,
   SafeAreaView,
   SectionList,
+  TouchableHighlight,
 } from 'react-native';
 import Colors from "../constants/Colors"
 
@@ -71,33 +72,39 @@ const DATA = [{
   }
 ];
 
-function Item({ title }) {
+function Item(props) {
     return (
-      <View style={styles.item}>
+      <View style={{marginVertical: 5}}>
+        <TouchableHighlight underlayColor="black" onPress={()=> { props.navigation.navigate('EventDetails');}}> 
+          <View style={styles.item}>
 
-        <View style={styles.timeContainer}>
-          <Text style={styles.time}>{title}</Text>
-        </View>
+            <View style={styles.timeContainer}>
+              <Text style={styles.time}>{props.title}</Text>
+            </View>
 
-        <View style={styles.itemContentContainer}>
-          <View style={styles.titleContainer}>
-            <View style={styles.categoryDot}></View>
-            <Text style={styles.title}>{title}</Text>
+            <View style={styles.itemContentContainer}>
+              <View style={styles.titleContainer}>
+                <View style={styles.categoryDot}></View>
+                <Text style={styles.title}>{props.title}</Text>
+              </View>
+              <Text style={styles.location}>{props.title}</Text>
+            </View>
+
           </View>
-          <Text style={styles.location}>{title}</Text>
-        </View>
-
+        </TouchableHighlight>
       </View>
     );
   }
 
-export default function ScheduleList() {
+export default function ScheduleList(props) {
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Item title={item.name} />}
+        renderItem={({ item }) => <Item id={item.id} navigation={props.navigation} title={item.name} />}
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.header}>{title}</Text>
         )}
@@ -117,7 +124,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#ffffff',
     padding: 15,
-    marginVertical: 5,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   header: {
     fontSize: 20,
