@@ -72,22 +72,22 @@ const DATA = [{
   }
 ];
 
-function Item({ title }) {
+function Item(props) {
     return (
       <View style={{marginVertical: 5}}>
-        <TouchableHighlight underlayColor="black" onPress={()=> { console.log('Clicked!');}}> 
+        <TouchableHighlight underlayColor="black" onPress={()=> { props.navigation.navigate('EventDetails');}}> 
           <View style={styles.item}>
 
             <View style={styles.timeContainer}>
-              <Text style={styles.time}>{title}</Text>
+              <Text style={styles.time}>{props.title}</Text>
             </View>
 
             <View style={styles.itemContentContainer}>
               <View style={styles.titleContainer}>
                 <View style={styles.categoryDot}></View>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{props.title}</Text>
               </View>
-              <Text style={styles.location}>{title}</Text>
+              <Text style={styles.location}>{props.title}</Text>
             </View>
 
           </View>
@@ -96,7 +96,7 @@ function Item({ title }) {
     );
   }
 
-export default function ScheduleList() {
+export default function ScheduleList(props) {
   
 
   return (
@@ -104,7 +104,7 @@ export default function ScheduleList() {
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Item title={item.name} />}
+        renderItem={({ item }) => <Item id={item.id} navigation={props.navigation} title={item.name} />}
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.header}>{title}</Text>
         )}
