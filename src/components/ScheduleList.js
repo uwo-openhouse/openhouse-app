@@ -74,12 +74,12 @@ const DATA = [{
 
 function Item(props) {
     return (
-      <View style={{marginVertical: 5}}>
+      <View style={{marginVertical: 0}}>
         <TouchableHighlight underlayColor="black" onPress={()=> { props.navigation.navigate('EventDetails');}}> 
           <View style={styles.item}>
 
             <View style={styles.timeContainer}>
-              <Text style={styles.time}>{props.title}</Text>
+              <Text style={styles.time}>7:00{"\n"}-{"\n"}13:00</Text>
             </View>
 
             <View style={styles.itemContentContainer}>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
 
   title: {
     flexGrow: 1,
-    fontSize: 24,
+    fontSize: 20,
     color: Colors.WesternPurple,
   },
   titleContainer: {
@@ -160,15 +160,16 @@ const styles = StyleSheet.create({
 
   },
   time: {
-    color:'#999999'
+    color:'#999999',
+    textAlign: 'center'
   },
   timeContainer: {
-    marginRight: 8,
+    marginRight: 10,
     width: 55,
   },
 
   location: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#666666',
   },
   categoryDot:{
