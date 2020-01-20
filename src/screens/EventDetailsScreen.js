@@ -1,18 +1,15 @@
 import React from 'react';
 import { View,Text, ScrollView, Image, StyleSheet } from 'react-native';
-import CustomHeader from "../components/CustomHeader";
-
 
 class EventDetailsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Event Details',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {/* <CustomHeader navigation={this.props.navigation} title="Event Details" /> */}
-        <Text></Text>
+        <Text>Content Here</Text>
       </View>
     );
   }

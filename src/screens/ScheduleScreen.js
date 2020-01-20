@@ -7,12 +7,13 @@ import ScheduleList from "../components/ScheduleList";
 class ScheduleScreen extends React.Component {
   static navigationOptions = {
       title: 'Schedule',
+      headerShown: false,
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {/* <CustomHeader navigation={this.props.navigation} title="Schedule" /> */}
+        <CustomHeader navigation={this.props.navigation} title="Schedule" />
         <ScheduleList navigation={this.props.navigation}/>
       </View>
     );
