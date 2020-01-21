@@ -1,5 +1,6 @@
 // noinspection ES6CheckImport
-import { BACKEND_URL } from 'react-native-dotenv'
+import { BACKEND_URL, DEFAULT_TIME_ZONE } from 'react-native-dotenv'
+import moment from "moment";
 
 export const getBackEndURL = () => BACKEND_URL;
 
@@ -22,5 +23,6 @@ export const buildMap = (responseJson) => {
     return map;
 };
 
-export const getDefaultTimezone = () => process.env.REACT_APP_DEFAULT_TIME_ZONE;
+export const getDefaultTimezone = () => DEFAULT_TIME_ZONE;
 
+export const formatTime = (time) => moment(time, 'H:m').format('h:mm A');
