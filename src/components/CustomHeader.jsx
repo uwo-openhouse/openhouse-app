@@ -16,6 +16,7 @@ const CustomHeader = ({navigation, title, children}) => {
       statusBarProps={{ barStyle: "light-content" }}
       containerStyle={{
         backgroundColor: Colors.westernPurple,
+        borderBottomWidth: 0,
       }}
       rightComponent={children}
     />

@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+  StyleSheet,
   Image,
   Text,
   View,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import CustomHeader from "../components/CustomHeader";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   let message = 'No open house right now please check back later';
@@ -16,7 +18,15 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   return (
       <View>
         <CustomHeader navigation={navigation} title="Home" />
-        <Text>{message}</Text>
+        <ScrollView>
+          <View style={{height:250,}}>
+            <Image   
+              style={styles.image}
+              source={require('../assets/images/MBOHbanner.png')}>
+            </Image>
+          </View>
+          <Text>{message}</Text>
+        </ScrollView>
       </View>
   );
 };
@@ -49,3 +59,12 @@ HomeScreen.defaultProps = {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  }
+});
