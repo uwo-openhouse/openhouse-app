@@ -1,5 +1,5 @@
-import * as moment from 'moment';
 import actionTypes from '../actions/actionTypes';
+import moment from "moment";
 
 const DEFAULT_STATE = {
     data:    [],
