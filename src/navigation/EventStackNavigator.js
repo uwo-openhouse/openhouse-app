@@ -9,6 +9,9 @@ import ScheduleScreen from "../containers/screens/ScheduleScreen";
 const EventStack = createStackNavigator({
       Schedule: {
         screen: ScheduleScreen,
+        navigationOptions: {
+          headerShown: false,
+        }
       },
       EventDetails: {
         screen: EventDetailsScreen
