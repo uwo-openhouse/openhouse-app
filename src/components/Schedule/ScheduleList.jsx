@@ -8,9 +8,12 @@ import {
 import * as PropTypes from 'prop-types';
 import moment from "moment";
 import {formatTime} from "../../service";
-import ScheduleItem from "../../containers/screens/Schedule/SchduleItem";
+import ScheduleItem from "../../containers/Schedule/SchduleItem";
 
 const ScheduleList = ({navigation, events}) => {
+    if (events.length === 0){
+        return (<Text style={styles.header}>No Events</Text>);
+    }
     const eventData = Object.entries(
         events.reduce((obj, event) => {
             if (!obj[event.time]) {

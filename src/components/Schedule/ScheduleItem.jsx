@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     title: {
         flexGrow: 1,
         fontSize: 24,
-        color: Colors.WesternPurple,
+        color: Colors.westernPurple,
     },
     titleContainer: {
         display: 'flex',

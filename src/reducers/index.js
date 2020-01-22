@@ -28,9 +28,9 @@ export const getErrors = state => errors.getErrors(state.errors);
 
 export const isOpenHousesLoaded = state => openHouses.isLoaded(state.openHouses);
 
-export const getAllOpenHouses = state => openHouses.getAllOpenHouses(state.openHouses);
+export const hasOpenHouse = state => openHouses.hasOpenHouse(state.openHouses);
 
-export const getOpenHouse = (state, id) => openHouses.getOpenHouse(state.openHouses, id);
+export const getOpenHouse = state => openHouses.getOpenHouse(state.openHouses);
 
 export const isEventsLoaded = state => events.isLoaded(state.events);
 

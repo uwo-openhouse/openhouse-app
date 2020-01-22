@@ -1,10 +1,16 @@
 import actionTypes from '../actions/actionTypes';
-import { buildMap } from '../service';
+
+const getFirstVisible = (openHouses) => {
+    if (openHouses.length === 0){
+        return null;
+    }
+    return openHouses.filter(openHouse => openHouse.visible).sort((a,b) => a.date - b.date)[0];
+};
 
 const DEFAULT_STATE = {
     loading: false,
     loaded: false,
-    data: {},
+    data: null,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -19,7 +25,7 @@ export default (state = DEFAULT_STATE, action) => {
                 ...state,
                 loading: false,
                 loaded: true,
-                data: buildMap(action.payload),
+                data: getFirstVisible(action.payload)
             };
         case actionTypes.FETCH_OPEN_HOUSES_FAILURE:
             return {
@@ -39,24 +45,18 @@ export const isLoaded = (state) => {
     return state.loaded;
 };
 
-export const getAllOpenHouses = (state) => {
+export const hasOpenHouse = (state) => {
     if (!state) {
         throw new Error('no store');
     }
-    if (state.data === null) {
-        throw new Error('no store');
-    }
 
-    return Object.values(state.data);
+    return state.data !== undefined;
 };
 
-export const getOpenHouse = (state, id) => {
+export const getOpenHouse = (state) => {
     if (!state) {
         throw new Error('no store');
     }
-    if (state.data === null) {
-        throw new Error('no store');
-    }
 
-    return state.data[id];
+    return state.data;
 };

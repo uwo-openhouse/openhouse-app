@@ -15,11 +15,12 @@ export default (state = DEFAULT_STATE, action) => {
                 loading: true,
             };
         case actionTypes.FETCH_EVENTS_SUCCESS:
+            const filteredEvents = action.payload.events.filter(event => event.openHouse === action.payload.openHouseId);
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                data: buildMap(action.payload),
+                data: buildMap(filteredEvents),
             };
         case actionTypes.FETCH_EVENTS_FAILURE:
             return {

@@ -17,7 +17,7 @@ const EventStack = createStackNavigator({
         initialRoutName: 'Schedule',
         defaultNavigationOptions: {
             headerStyle: {
-              backgroundColor: Colors.WesternPurple,
+              backgroundColor: Colors.westernPurple,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

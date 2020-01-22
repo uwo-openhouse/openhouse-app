@@ -1,5 +1,5 @@
-import {getArea, getLocation} from "../../../reducers";
-import ScheduleItem from "../../../components/Schedule/ScheduleItem";
+import {getArea, getLocation} from "../../reducers";
+import ScheduleItem from "../../components/Schedule/ScheduleItem";
 import {connect} from "react-redux";
 
 

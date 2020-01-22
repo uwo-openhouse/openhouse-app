@@ -9,9 +9,10 @@ import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from "react-redux";
 import configureStore from "./src/configureStore";
 import {getEvents} from "./src/actions/events";
-import {getOpenHouses} from "./src/actions/openHouses";
 import {getAreas} from "./src/actions/areas";
 import {getLocations} from "./src/actions/locations";
+import {getOpenHouse, hasOpenHouse} from "./src/reducers";
+import {getOpenHouses} from "./src/actions/openHouses";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -26,10 +27,17 @@ export default function App(props) {
         );
     } else {
         const store = configureStore();
+        store.dispatch(getOpenHouses()).then(() => {
+            const state = store.getState();
+            let openHouseID = null;
+            if (hasOpenHouse(state)){
+               openHouseID = getOpenHouse(state).uuid;
+            }
+            store.dispatch(getEvents(openHouseID));
+
+        });
         store.dispatch(getLocations());
         store.dispatch(getAreas());
-        store.dispatch(getOpenHouses());
-        store.dispatch(getEvents());
         return (
             <Provider store={store}>
                 <View style={styles.container}>
@@ -50,7 +58,7 @@ async function loadResourcesAsync() {
         Font.loadAsync({
             // This is the font that we are using for our tab bar
             ...Ionicons.font,
-            // We include SpaceMono because we use it in HomeScreen.js. Feel free to
+            // We include SpaceMono because we use it in HomeScreen.jsx. Feel free to
             // remove this if you are not using it in your app
             'space-mono': require('./src/assets/fonts/SpaceMono-Regular.ttf'),
         }),

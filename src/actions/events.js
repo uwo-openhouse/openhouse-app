@@ -3,7 +3,7 @@ import actionTypes from './actionTypes';
 import { fetchEvents } from '../service/events';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getEvents = () => (dispatch) => {
+export const getEvents = (openHouseId) => (dispatch) => {
     dispatch({
         type: actionTypes.FETCH_EVENTS_STARTED,
     });
@@ -12,7 +12,10 @@ export const getEvents = () => (dispatch) => {
         .then((response) => {
             dispatch({
                 type: actionTypes.FETCH_EVENTS_SUCCESS,
-                payload: response,
+                payload: {
+                    events: response,
+                    openHouseId,
+                },
             });
         })
         .catch((error) => {
