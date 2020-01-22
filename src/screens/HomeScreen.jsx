@@ -1,22 +1,43 @@
 import React from 'react';
 import {
+  StyleSheet,
   Image,
   Text,
   View,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import CustomHeader from "../components/CustomHeader";
+import { ScrollView } from 'react-native-gesture-handler';
+import { Button } from 'react-native-elements';
+import Colors from "../constants/Colors";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
-  let message = 'No open house right now please check back later';
+  let messageTitle = ''
+  let messageBody = 'No open house right now please check back later';
+
   if (hasOpenHouse){
-    message = `Welcome to the ${openHouse.name}`;
+    messageBody = `We are delighted you have decided to attend ${openHouse.name}. Today, you have the opportunity to meet with professors, staff and students to learn why Western offers the best student experience among Canadian universities.`;
+    messageTitle = `Welcome to the ${openHouse.name}`;
   }
 
   return (
       <View>
         <CustomHeader navigation={navigation} title="Home" />
-        <Text>{message}</Text>
+        <ScrollView>
+          <View style={{height:250,}}>
+            <Image   
+              style={styles.image}
+              source={require('../assets/images/MBOHbanner.png')}>
+            </Image>
+          </View>
+          <Text style={styles.title}>{messageTitle}</Text>
+          <View style={styles.content} >
+            <Text style={styles.messageBody}>{messageBody}</Text>
+            <Button buttonStyle={styles.navButton} 
+                    title="Schedule" 
+                    onPress={() => navigation.navigate('Schedule')}></Button>
+          </View>
+        </ScrollView>
       </View>
   );
 };
@@ -49,3 +70,44 @@ HomeScreen.defaultProps = {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  title: {
+    color: 'white',
+    borderTopColor: 'white',
+    borderTopWidth: 5,
+    backgroundColor: Colors.westernPurple,
+    textAlign: 'center',
+    paddingTop: 20,
+    paddingBottom: 10,
+    paddingHorizontal: 35,
+    fontFamily: 'bentonsans-bold',
+    fontSize: 22  ,
+    lineHeight: 28,
+  },
+  content:{
+    backgroundColor: 'white',
+    padding: 16,
+  },
+  messageBody: {
+    lineHeight: 18,
+    fontFamily: 'bentonsans-book',
+    marginHorizontal: 16,
+    paddingTop: 10,
+    paddingBottom: 25,
+    borderBottomColor: '#999',
+    borderBottomWidth: 1
+  },
+  navButton: {
+    backgroundColor: Colors.westernPurple,
+    borderRadius: 25,
+    marginTop: 25,
+    marginBottom: 10,
+  }
+});

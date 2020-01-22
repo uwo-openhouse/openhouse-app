@@ -5,7 +5,8 @@ const HamburgerMenu = props => {
   return (
     <Icon
       color="#fff"
-      name="menu"
+      name="menu" 
+      size={30} 
       onPress={() => props.navigation.toggleDrawer()}
     />
   );
