@@ -7,7 +7,6 @@ import * as PropTypes from "prop-types";
 const ScheduleScreen = ({navigation, events, areas}) => {
     const noFilterName = 'None';
     const [filter, setFilter] = useState(noFilterName);
-    console.log(JSON.stringify(navigation));
     return (
         <View style={styles.container}>
             <CustomHeader navigation={navigation} title="Schedule">
