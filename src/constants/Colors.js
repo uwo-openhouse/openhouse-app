@@ -11,5 +11,5 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
-  WesternPurple: '#4f2683',
+  westernPurple: '#4f2683',
 };
