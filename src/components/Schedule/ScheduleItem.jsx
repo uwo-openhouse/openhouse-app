@@ -4,10 +4,11 @@ import Colors from "../../constants/Colors";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
 
-const ScheduleItem = ({navigation, name, room, areaColor, buildingName, time}) =>  {
+const ScheduleItem = ({navigation, name, room, areaColor, building, time, uuid}) =>  {
+    console.log(building);
     return (
         <View style={{marginVertical: 5}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails');}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {building: building, event: uuid, name: name});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
@@ -19,7 +20,7 @@ const ScheduleItem = ({navigation, name, room, areaColor, buildingName, time}) =
                             <View style={[styles.categoryDot, {backgroundColor: areaColor}]}/>
                             <Text style={styles.title}>{name}</Text>
                         </View>
-                        <Text style={styles.location}>{buildingName} {room}</Text>
+                        <Text style={styles.location}>{building.name} {room}</Text>
                     </View>
 
                 </View>
@@ -34,7 +35,15 @@ ScheduleItem.propTypes = {
     time: PropTypes.string.isRequired,
     room: PropTypes.string.isRequired,
     areaColor: PropTypes.string.isRequired,
-    buildingName: PropTypes.string.isRequired
+    building: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        position: PropTypes.shape({
+            lat: PropTypes.number.isRequired,
+            lng: PropTypes.number.isRequired,
+        }),
+        uuid: PropTypes.string.isRequired,
+    }),
+    uuid:PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

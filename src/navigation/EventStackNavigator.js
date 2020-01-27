@@ -1,6 +1,6 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
-import EventDetailsScreen from "../screens/EventDetailsScreen";
+import EventDetailsScreen from "../containers/screens/EventDetailsScreen";
 
 import Colors from "../constants/Colors"
 import ScheduleScreen from "../containers/screens/ScheduleScreen";
