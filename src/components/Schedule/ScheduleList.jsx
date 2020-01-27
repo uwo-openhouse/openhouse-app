@@ -38,7 +38,6 @@ const ScheduleList = ({navigation, events}) => {
             data: events,
             title: formatTime(time),
         }));
-
     return (
         <SafeAreaView style={styles.container}>
             <SectionList

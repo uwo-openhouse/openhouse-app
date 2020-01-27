@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 
 const mapStateToProps = (state, { building, area }) => ({
-    buildingName: getLocation(state, building).name,
+    building: getLocation(state, building),
     areaColor: getArea(state, area).color,
 });
 
