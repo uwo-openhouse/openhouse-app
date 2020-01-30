@@ -1,8 +1,6 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
-import EventDetailsScreen from "../screens/EventDetailsScreen";
-
-import Colors from "../constants/Colors"
+import EventDetailsScreen from "../containers/screens/EventDetailsScreen";
 import ScheduleScreen from "../containers/screens/ScheduleScreen";
 
 
@@ -19,19 +17,10 @@ const EventStack = createStackNavigator({
     },{
         initialRoutName: 'Schedule',
         defaultNavigationOptions: {
-            headerStyle: {
-              backgroundColor: Colors.westernPurple,
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          },
-          headerBackTitleVisible: false,
-          headerTitleAlign: 'center'
+            header:null,
+        },
     }
 );
-
 
 
 export default createAppContainer(EventStack);

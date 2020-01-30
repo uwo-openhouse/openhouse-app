@@ -1,17 +1,21 @@
 import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import React from "react";
+import { Icon } from 'react-native-elements';
 import Colors from "../../constants/Colors";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
 
-const ScheduleItem = ({navigation, name, room, areaColor, buildingName, time}) =>  {
+const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
+    console.log(building);
     return (
         <View style={{marginVertical: 5}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails');}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
-                        <Text style={styles.time}>{formatTime(time)}</Text>
+                        <Text style={styles.time}>{formatTime(startTime)}</Text>
+                        <Icon name='minus' type="font-awesome" color="#999999"/>
+                        <Text style={styles.time}>{formatTime(endTime)}</Text>
                     </View>
 
                     <View style={styles.itemContentContainer}>
@@ -19,7 +23,7 @@ const ScheduleItem = ({navigation, name, room, areaColor, buildingName, time}) =
                             <View style={[styles.categoryDot, {backgroundColor: areaColor}]}/>
                             <Text style={styles.title}>{name}</Text>
                         </View>
-                        <Text style={styles.location}>{buildingName} {room}</Text>
+                        <Text style={styles.location}>{building.name} {room}</Text>
                     </View>
 
                 </View>
@@ -31,10 +35,19 @@ const ScheduleItem = ({navigation, name, room, areaColor, buildingName, time}) =
 ScheduleItem.propTypes = {
     navigation: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    startTime: PropTypes.string.isRequired,
+    endTime: PropTypes.string.isRequired,
     room: PropTypes.string.isRequired,
     areaColor: PropTypes.string.isRequired,
-    buildingName: PropTypes.string.isRequired
+    building: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        position: PropTypes.shape({
+            lat: PropTypes.number.isRequired,
+            lng: PropTypes.number.isRequired,
+        }),
+        uuid: PropTypes.string.isRequired,
+    }),
+    uuid:PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
     },
     timeContainer: {
         marginRight: 8,
-        width: 55,
+        width: 60,
     },
 
     location: {
