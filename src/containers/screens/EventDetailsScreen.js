@@ -3,7 +3,6 @@ import {
     isLocationsLoaded,
     isOpenHousesLoaded,
 	getEvent,
-	getLocation,
 } from "../../reducers";
 import EventDetailsScreen from "../../screens/EventDetailsScreen";
 import {connect} from "react-redux";
