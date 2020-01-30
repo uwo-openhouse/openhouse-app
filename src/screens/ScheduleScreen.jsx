@@ -42,7 +42,8 @@ ScheduleScreen.propTypes = {
             area: PropTypes.string.isRequired,
             building: PropTypes.string.isRequired,
             openHouse: PropTypes.string.isRequired,
-            time: PropTypes.string.isRequired,
+            startTime: PropTypes.string.isRequired,
+            endTime: PropTypes.string.isRequired,
             room: PropTypes.string.isRequired,
         })).isRequired,
     areas: PropTypes.arrayOf(
