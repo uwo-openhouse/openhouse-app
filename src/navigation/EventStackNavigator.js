@@ -20,5 +20,4 @@ const EventStack = createStackNavigator({
 );
 
 
-
 export default createAppContainer(EventStack);

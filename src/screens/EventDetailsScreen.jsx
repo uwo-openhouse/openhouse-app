@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import Colors from "../constants/Colors";
+import { Header } from "react-native-elements";
+import { HeaderBackButton  } from "react-navigation-stack";
 
-const EventDetailsScreen = ({building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
+const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
         latitude: building.position.lat,
         longitude: building.position.lng,
@@ -23,6 +26,17 @@ const EventDetailsScreen = ({building, event, isInPlanner, addToPlanner, removeF
     }
     return (
         <View style={styles.container}>
+            <Header
+                leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
+                centerComponent={{
+                    text: event.name,
+                    style: { color: "#fff", fontWeight: "bold" },
+                }}
+                statusBarProps={{ barStyle: "light-content" }}
+                containerStyle={{
+                    backgroundColor: Colors.westernPurple,
+                }}
+            />
             <Text style={styles.location}>Location: {building.name}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
             {isInPlanner ? (
@@ -91,7 +105,7 @@ export default EventDetailsScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 10,
+        paddingTop: 0,
         backgroundColor: '#E5E5E5',
     },
     location: {
