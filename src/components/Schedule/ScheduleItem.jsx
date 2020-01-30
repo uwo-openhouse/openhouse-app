@@ -9,7 +9,7 @@ const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, e
     console.log(building);
     return (
         <View style={{marginVertical: 5}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {building: building, event: uuid, name: name});}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
