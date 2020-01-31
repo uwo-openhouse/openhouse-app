@@ -4,10 +4,9 @@ import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
 import * as PropTypes from "prop-types";
 
-
 //Note based off thr Schedule Screen
 
-const PlannerScreen = ({navigation, events, areas}) => {
+const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
     const noFilterName = 'None';
     const [filter, setFilter] = useState(noFilterName);
     return (
@@ -26,7 +25,7 @@ const PlannerScreen = ({navigation, events, areas}) => {
                     ))}
                 </Picker>
             </CustomHeader>
-            <ScheduleList navigation={navigation} events={events.filter(({area}) => (area === filter || filter === noFilterName) )}/>
+            <ScheduleList navigation={navigation} events={events.filter(({area, uuid}) => (eventsInPlanner.includes(uuid) && (area === filter || filter === noFilterName)) )}/>
         </View>
 
     );

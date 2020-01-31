@@ -4,7 +4,8 @@ import {
     isAreasLoaded,
     isEventsLoaded,
     isLocationsLoaded,
-    isOpenHousesLoaded
+    isOpenHousesLoaded,
+    getEventsInPlanner
 } from "../../reducers";
 import PlannerScreen from "../../screens/PlannerScreen";
 import {connect} from "react-redux";
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
     events: getAllEvents(state),
     areas: getAllAreas(state),
     isLoaded: isEventsLoaded(state) && isLocationsLoaded(state) && isAreasLoaded(state) && isOpenHousesLoaded(state),
+    eventsInPlanner: getEventsInPlanner(state),
 });
 
 export default connect(mapStateToProps)(Loadable(PlannerScreen));
