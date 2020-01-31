@@ -1,18 +1,21 @@
 import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import React from "react";
+import { Icon } from 'react-native-elements';
 import Colors from "../../constants/Colors";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
 
-const ScheduleItem = ({navigation, name, room, areaColor, building, time, uuid}) =>  {
+const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
     console.log(building);
     return (
         <View style={{marginVertical: 5}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {building: building, event: uuid, name: name});}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
-                        <Text style={styles.time}>{formatTime(time)}</Text>
+                        <Text style={styles.time}>{formatTime(startTime)}</Text>
+                        <Icon name='minus' type="font-awesome" color="#999999"/>
+                        <Text style={styles.time}>{formatTime(endTime)}</Text>
                     </View>
 
                     <View style={styles.itemContentContainer}>
@@ -32,7 +35,8 @@ const ScheduleItem = ({navigation, name, room, areaColor, building, time, uuid})
 ScheduleItem.propTypes = {
     navigation: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    startTime: PropTypes.string.isRequired,
+    endTime: PropTypes.string.isRequired,
     room: PropTypes.string.isRequired,
     areaColor: PropTypes.string.isRequired,
     building: PropTypes.shape({
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     },
     timeContainer: {
         marginRight: 8,
-        width: 55,
+        width: 60,
     },
 
     location: {

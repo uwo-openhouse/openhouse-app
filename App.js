@@ -4,7 +4,7 @@ import * as Font from 'expo-font';
 import React, {useState} from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
-
+import { PersistGate } from 'redux-persist/integration/react'
 import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from "react-redux";
 import configureStore from "./src/configureStore";
@@ -26,12 +26,12 @@ export default function App(props) {
             />
         );
     } else {
-        const store = configureStore();
+        const {store, persistor} = configureStore();
         store.dispatch(getOpenHouses()).then(() => {
             const state = store.getState();
             let openHouseID = null;
-            if (hasOpenHouse(state)){
-               openHouseID = getOpenHouse(state).uuid;
+            if (hasOpenHouse(state)) {
+                openHouseID = getOpenHouse(state).uuid;
             }
             store.dispatch(getEvents(openHouseID));
 
@@ -40,10 +40,12 @@ export default function App(props) {
         store.dispatch(getAreas());
         return (
             <Provider store={store}>
-                <View style={styles.container}>
-                    {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                    <AppNavigator/>
-                </View>
+                <PersistGate loading={null} persistor={persistor}>
+                    <View style={styles.container}>
+                        {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+                        <AppNavigator/>
+                    </View>
+                </PersistGate>
             </Provider>
         );
     }
