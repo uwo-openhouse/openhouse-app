@@ -3,8 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import EventDetailsScreen from "../containers/screens/EventDetailsScreen";
 import ScheduleScreen from "../containers/screens/ScheduleScreen";
 
-
-const EventStack = createStackNavigator({
+const ScheduleStack = createStackNavigator({
       Schedule: {
         screen: ScheduleScreen,
         navigationOptions: {
@@ -23,4 +22,4 @@ const EventStack = createStackNavigator({
 );
 
 
-export default createAppContainer(EventStack);
+export default createAppContainer(ScheduleStack);
