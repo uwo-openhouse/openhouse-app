@@ -21,7 +21,7 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   }
 
   return (
-      <View>
+      <View style={{flex: 1}}>
         <CustomHeader navigation={navigation} title="Home" />
         <ScrollView>
           <View style={{height:250,}}>
@@ -36,6 +36,9 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
             <Button buttonStyle={styles.navButton} 
                     title="Schedule" 
                     onPress={() => navigation.navigate('Schedule')}></Button>
+            <Button buttonStyle={styles.navButton} 
+                    title="Planner" 
+                    onPress={() => navigation.navigate('Planner')}></Button>
           </View>
         </ScrollView>
       </View>
@@ -92,6 +95,7 @@ const styles = StyleSheet.create({
     lineHeight: 28,
   },
   content:{
+    flex: 1,
     backgroundColor: 'white',
     padding: 16,
   },
@@ -101,13 +105,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     paddingTop: 10,
     paddingBottom: 25,
+    marginBottom: 10,
     borderBottomColor: '#999',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   navButton: {
     backgroundColor: Colors.westernPurple,
     borderRadius: 25,
-    marginTop: 25,
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom: 5,
   }
 });
