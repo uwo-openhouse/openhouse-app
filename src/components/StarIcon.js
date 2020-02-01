@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-	Platform,
+    Platform,
     ToastAndroid
 } from 'react-native';
 import * as PropTypes from "prop-types";
@@ -9,39 +9,39 @@ import { Icon } from "react-native-elements";
 import Colors from "../constants/Colors";
 
 const StarIcon = ({isInPlanner, add, remove, event}) => {
-	const border = {name: "star-border", check: false};
-	const full = {name: "star", check: true};
+    const border = {name: "star-border", check: false};
+    const full = {name: "star", check: true};
 
     const star = isInPlanner ? full : border;
     const [icon, setIcon] = useState(star);
 
-	return (
-		<Icon
-	        name={icon.name}
-	        size={30}
-	        color="#FFFFFF"
-	        underlayColor={Colors.westernPurple}
-	        style={{
-	            backgroundColor: Colors.westernPurple,
-	        }}
-	        onPress={() => {
-			    if (star.check) {
-			        remove(event);
-			        if (Platform.OS == 'android') {
-			            ToastAndroid.show('Event has been removed from your itinerary.', ToastAndroid.SHORT);
-			        }
-			        setIcon(border);
-			    }
-			    else {
-			        add(event);
-			        if (Platform.OS == 'android') {
-			            ToastAndroid.show('Event has been added to your itinerary.', ToastAndroid.SHORT);
-			        }
-			        setIcon(full);
-			    }
-	        }}
-	    />
-	);
+    return (
+       <Icon
+            name={icon.name}
+            size={30}
+            color="#FFFFFF"
+            underlayColor={Colors.westernPurple}
+            style={{
+                backgroundColor: Colors.westernPurple,
+            }}
+            onPress={() => {
+                if (star.check) {
+                    remove(event);
+                    if (Platform.OS == 'android') {
+                        ToastAndroid.show('Event has been removed from your itinerary.', ToastAndroid.SHORT);
+                    }
+                    setIcon(border);
+                }
+                else {
+                    add(event);
+                    if (Platform.OS == 'android') {
+                        ToastAndroid.show('Event has been added to your itinerary.', ToastAndroid.SHORT);
+                    }
+                    setIcon(full);
+                }
+            }}
+        />
+    );
 }
 
 StarIcon.propTypes = {
