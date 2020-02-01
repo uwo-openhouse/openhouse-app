@@ -6,13 +6,16 @@ import {
     Dimensions,
     PermissionsAndroid,
     Platform,
-    Button
+    Button,
+    ScrollView,
+    ToastAndroid
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Colors from "../constants/Colors";
-import { Header } from "react-native-elements";
-import { HeaderBackButton  } from "react-navigation-stack";
+import { Header, Icon } from "react-native-elements";
+import { HeaderBackButton } from "react-navigation-stack";
+import StarIcon from "../components/StarIcon";
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
@@ -24,14 +27,25 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
     }
+
     return (
-        <View style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            stickyHeaderIndices={[0]}
+        >
             <Header
                 leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
                 centerComponent={{
                     text: event.name,
-                    style: { color: "#fff", fontWeight: "bold" },
+                    style: {
+                      color: "#fff",
+                      fontSize: 20,
+                      fontFamily:'bentonsans-bold',
+                    },
                 }}
+                rightComponent={
+                    <StarIcon isInPlanner={isInPlanner} add={addToPlanner} remove={removeFromPlanner} event={event} />
+                }
                 statusBarProps={{ barStyle: "light-content" }}
                 containerStyle={{
                     backgroundColor: Colors.westernPurple,
@@ -39,11 +53,6 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             />
             <Text style={styles.location}>Location: {building.name}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
-            {isInPlanner ? (
-                <Button title="Remove from my planner" onPress={() => removeFromPlanner(event)}/>
-            ) : (
-                <Button title="Add to my planner" onPress={() => addToPlanner(event)}/>
-            )}
             <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.mapStyle}
@@ -64,7 +73,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                 coordinate={loc}
                 />
             </MapView>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -109,13 +118,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5E5E5',
     },
     location: {
-        flex: 1
+        flex: 1,
+        marginTop: 20,
+        marginHorizontal: 20,
+        fontSize: 20,
+        color: Colors.westernPurple,
     },
     description: {
+        marginTop: 20,
+        marginBottom: 20,
+        marginHorizontal: 20,
+        fontSize: 20,
         flex: 5,
+        color: Colors.westernPurple,
     },
     mapStyle: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height * (3 / 5),
+        marginBottom: 20,
+        marginHorizontal: 20,
+        width: Dimensions.get('window').width - 40,
+        height: Dimensions.get('window').height / 2 - 20,
     },
 });
