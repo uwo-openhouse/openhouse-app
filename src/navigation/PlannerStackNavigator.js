@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack';
 import EventDetailsScreen from "../containers/screens/EventDetailsScreen";
 import PlannerScreen from "../containers/screens/PlannerScreen";
 
-
 const PlannerStack = createStackNavigator({
       Planner: {
         screen: PlannerScreen,

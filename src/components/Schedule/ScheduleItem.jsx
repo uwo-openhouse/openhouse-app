@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     },
     timeContainer: {
         marginRight: 8,
-        width: 60,
+        width: 65,
     },
 
     location: {
