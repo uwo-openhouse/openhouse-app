@@ -40,7 +40,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             <Text style={styles.location}>Location: {building.name}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
             {isInPlanner ? (
-                <Button title="Remove from my planner" onPress={() => removeFromPlanner(event)}/>
+                <Button title="Remove from my planner" onPress={() => removeFromPlanner(event.uuid)}/>
             ) : (
                 <Button title="Add to my planner" onPress={() => addToPlanner(event)}/>
             )}

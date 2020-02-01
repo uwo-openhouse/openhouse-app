@@ -28,6 +28,8 @@ export const getArea = (state, id) => areas.getArea(state.areas, id);
 
 export const getErrors = state => errors.getErrors(state.errors);
 
+export const hasErrors = state => errors.hasErrors(state.errors);
+
 export const isOpenHousesLoaded = state => openHouses.isLoaded(state.openHouses);
 
 export const hasOpenHouse = state => openHouses.hasOpenHouse(state.openHouses);
@@ -41,3 +43,7 @@ export const getAllEvents = state => events.getAllEvents(state.events);
 export const getEvent = (state, id) => events.getEvent(state.events, id);
 
 export const eventIsInPlanner = (state, id) => planner.eventIsInPlanner(state.planner, id);
+
+export const isVisitingOpenHouse = state => planner.isVisitingOpenHouse(state.planner);
+
+export const getNotificationID = (state, eventID)  => planner.getNotificationID(state.planner, eventID);
