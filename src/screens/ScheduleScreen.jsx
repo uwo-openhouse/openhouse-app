@@ -1,31 +1,21 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Picker} from 'react-native';
+import {View, StyleSheet, Picker, ActionSheetIOS, Text, Platform} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
+import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 
 const ScheduleScreen = ({navigation, events, areas}) => {
     const noFilterName = 'None';
     const [filter, setFilter] = useState(noFilterName);
+
     return (
         <View style={styles.container}>
             <CustomHeader navigation={navigation} title="Schedule">
-                <Picker
-                    selectedValue={filter}
-                    prompt="Filter"
-                    mode="dialog"
-                    style={styles.dropdown}
-                    onValueChange={(value) => setFilter(value)}
-                >
-                    <Picker.Item value={noFilterName} label="Show All"/>
-                    {areas.map(({uuid, name, color}) => (
-                        <Picker.Item color={color} key={`filter-area-${uuid}`} value={uuid} label={name}/>
-                    ))}
-                </Picker>
+                <AreaFilter areas={areas} filter={filter} setFilter={setFilter} noFilterName={noFilterName}/>
             </CustomHeader>
             <ScheduleList navigation={navigation} events={events.filter(({area}) => (area === filter || filter === noFilterName) )}/>
         </View>
-
     );
 };
 
@@ -63,9 +53,4 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: '#E5E5E5',
     },
-    dropdown: {
-        flex: 1,
-        width: 150,
-        color: 'white',
-    }
 });
