@@ -44,6 +44,6 @@ export const getEvent = (state, id) => events.getEvent(state.events, id);
 
 export const eventIsInPlanner = (state, id) => planner.eventIsInPlanner(state.planner, id);
 
-export const isVisitingOpenHouse = state => planner.isVisitingOpenHouse(state.planner);
+export const isVisitingOpenHouse = (state, openHouseID) => planner.isVisitingOpenHouse(state.planner, openHouseID);
 
 export const getNotificationID = (state, eventID)  => planner.getNotificationID(state.planner, eventID);

@@ -1,6 +1,6 @@
 import actionTypes from "./actionTypes";
 import {Notifications} from 'expo';
-import {sendAddToPlanner, sendRemoveFromPlanner} from "../service/planner";
+import {sendAddToOpenHouse, sendAddToPlanner, sendRemoveFromPlanner} from "../service/planner";
 import moment from 'moment-timezone';
 import {getDefaultTimezone} from "../service";
 import {getNotificationID, getOpenHouse, isVisitingOpenHouse} from "../reducers";
@@ -16,9 +16,18 @@ export const addToPlanner = (event) => (dispatch, getState) => {
     const openHouse = getOpenHouse(getState());
     // adds the open house date and the event time to produce a time stamp
     const eventDate = moment.unix(openHouse.date).tz(getDefaultTimezone());
-    const eventTime = moment.tz(event.startTime, 'H:m', getDefaultTimezone()).day(eventDate.day()).month(eventDate.month()).year(eventDate.year());
-
+    const eventTime = moment.tz(event.startTime, 'H:m', getDefaultTimezone()).month(eventDate.month()).date(eventDate.date()).year(eventDate.year());
     const visitingOpenHouse = isVisitingOpenHouse(getState(), openHouse.uuid);
+
+    dispatch({
+        type: actionTypes.ADD_EVENT_TO_PLANNER_STARTED,
+        payload: {
+            event: event,
+            notificationTime: eventTime.unix(),
+            openHouse,
+            isOpenHouseVisited: visitingOpenHouse,
+        },
+    });
 
     const dispatchAdd = notificationID => dispatch({
         type: actionTypes.ADD_EVENT_TO_PLANNER,
@@ -28,7 +37,6 @@ export const addToPlanner = (event) => (dispatch, getState) => {
                 notificationID: notificationID,
             },
             openHouse: openHouse.uuid,
-
         },
     });
 
@@ -54,13 +62,24 @@ export const addToPlanner = (event) => (dispatch, getState) => {
             }));
     }
 
-
-    // TODO send openhouse attendance
-    return sendAddToPlanner(event.uuid);
+    const requests = [sendAddToPlanner(event.uuid)];
+    if (!visitingOpenHouse){
+        requests.push(sendAddToOpenHouse(openHouse.uuid));
+    }
+    return Promise.all(requests)
 };
 
 export const removeFromPlanner = (eventID) => (dispatch, getState) => {
     const notificationID = getNotificationID(getState(), eventID);
+
+    dispatch({
+        type: actionTypes.REMOVE_EVENT_FROM_PLANNER_STARTED,
+        payload: {
+            eventID,
+            notificationID,
+        },
+    });
+
     if (notificationID) {
         Notifications.cancelScheduledNotificationAsync(notificationID)
             .then(() => dispatch({
