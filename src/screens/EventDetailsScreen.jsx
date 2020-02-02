@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {
     View,
     Text,
@@ -7,8 +7,7 @@ import {
     PermissionsAndroid,
     Platform,
     Button,
-    ScrollView,
-    ToastAndroid
+    ScrollView
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
@@ -16,6 +15,7 @@ import Colors from "../constants/Colors";
 import { Header, Icon } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
@@ -27,6 +27,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
     }
+    const toast = useRef(null);
 
     return (
         <ScrollView
@@ -44,7 +45,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                     },
                 }}
                 rightComponent={
-                    <StarIcon isInPlanner={isInPlanner} add={addToPlanner} remove={removeFromPlanner} event={event} />
+                    <StarIcon toast={toast} isInPlanner={isInPlanner} add={addToPlanner} remove={removeFromPlanner} event={event} />
                 }
                 statusBarProps={{ barStyle: "light-content" }}
                 containerStyle={{
@@ -73,6 +74,10 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                 coordinate={loc}
                 />
             </MapView>
+            <Toast
+                ref={toast}
+                style={styles.toast}
+            />
         </ScrollView>
     );
 };
@@ -137,5 +142,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         width: Dimensions.get('window').width - 40,
         height: Dimensions.get('window').height / 2 - 20,
+    },
+    toast: {
+        width: Dimensions.get('window').width*3/4,
     },
 });

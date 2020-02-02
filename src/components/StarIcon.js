@@ -1,14 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
+    Dimensions,
+    StyleSheet,
     Platform,
-    ToastAndroid
+    Text,
+    View
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import { Icon } from "react-native-elements";
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 import Colors from "../constants/Colors";
 
-const StarIcon = ({isInPlanner, add, remove, event}) => {
+const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
     const border = {name: "star-border", check: false};
     const full = {name: "star", check: true};
 
@@ -16,31 +20,29 @@ const StarIcon = ({isInPlanner, add, remove, event}) => {
     const [icon, setIcon] = useState(star);
 
     return (
-       <Icon
-            name={icon.name}
-            size={30}
-            color="#FFFFFF"
-            underlayColor={Colors.westernPurple}
-            style={{
-                backgroundColor: Colors.westernPurple,
-            }}
-            onPress={() => {
-                if (star.check) {
-                    remove(event);
-                    if (Platform.OS == 'android') {
-                        ToastAndroid.show('Event has been removed from your itinerary.', ToastAndroid.SHORT);
+        <View>
+            <Icon
+                name={icon.name}
+                size={30}
+                color="#FFFFFF"
+                underlayColor={Colors.westernPurple}
+                style={{
+                    backgroundColor: Colors.westernPurple,
+                }}
+                onPress={() => {
+                    if (star.check) {
+                        remove(event);
+                        toast.current.show(<Text style={styles.toastText} >Event has been removed from your planner.</Text>);
+                        setIcon(border);
                     }
-                    setIcon(border);
-                }
-                else {
-                    add(event);
-                    if (Platform.OS == 'android') {
-                        ToastAndroid.show('Event has been added to your itinerary.', ToastAndroid.SHORT);
+                    else {
+                        add(event);
+                        toast.current.show(<Text style={styles.toastText} >Event has been added to your planner.</Text>);
+                        setIcon(full);
                     }
-                    setIcon(full);
-                }
-            }}
-        />
+                }}
+            />
+        </View>
     );
 }
 
@@ -60,5 +62,12 @@ StarIcon.propTypes = {
         uuid: PropTypes.string.isRequired,
     }),
 };
+
+const styles = StyleSheet.create({
+    toastText: {
+        color: 'white',
+        textAlign: 'center',
+    }
+});
 
 export default StarIcon;
