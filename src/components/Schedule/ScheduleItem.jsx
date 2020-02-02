@@ -12,7 +12,6 @@ import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
 
 const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
-    console.log(building);
     return (
         <View style={{marginVertical: 5}}>
             <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
