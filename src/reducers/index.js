@@ -41,3 +41,5 @@ export const getAllEvents = state => events.getAllEvents(state.events);
 export const getEvent = (state, id) => events.getEvent(state.events, id);
 
 export const eventIsInPlanner = (state, id) => planner.eventIsInPlanner(state.planner, id);
+
+export const getEventsInPlanner = state => planner.eventsInPlanner(state.planner);

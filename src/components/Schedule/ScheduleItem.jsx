@@ -1,4 +1,10 @@
-import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import {
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    View,
+    Dimensions
+} from "react-native";
 import React from "react";
 import { Icon } from 'react-native-elements';
 import Colors from "../../constants/Colors";
@@ -86,11 +92,12 @@ const styles = StyleSheet.create({
 
     },
     time: {
-        color:'#999999'
+        color:'#999999',
+        textAlign: 'center',
     },
     timeContainer: {
         marginRight: 8,
-        width: 60,
+        width: Dimensions.get('window').width*0.15,
     },
 
     location: {

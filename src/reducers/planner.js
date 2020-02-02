@@ -29,3 +29,7 @@ export default (state = DEFAULT_STATE, action) => {
 export const eventIsInPlanner = (state, eventId) => {
     return state.data.map(({eventID}) => eventID).includes(eventId);
 };
+
+export const eventsInPlanner = (state) => {
+    return state.data.map(({eventID}) => eventID);
+};
