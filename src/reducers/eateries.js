@@ -15,12 +15,11 @@ export default (state = DEFAULT_STATE, action) => {
                 loading: true,
             };
         case actionTypes.FETCH_EATERIES_SUCCESS:
-            const filteredEateries = action.payload.eateries.filter(eatery => eatery.openHouse === action.payload.openHouseId);
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                data: buildMap(filteredEateries),
+                data: buildMap(action.payload),
             };
         case actionTypes.FETCH_EATERIES_FAILURE:
             return {

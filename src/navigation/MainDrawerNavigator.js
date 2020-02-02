@@ -4,6 +4,7 @@ import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import PlannerStack from "./PlannerStackNavigator";
 import ScheduleStack from "./ScheduleStackNavigator";
+import EateryStack from "./EateryStackNavigator";
 import HomeScreen from "../containers/screens/HomeScreen";
 
 
@@ -23,9 +24,13 @@ const MainDrawerNavigator = createDrawerNavigator({
       drawerLabel: 'Planner',
     }
   },
+  EateryStack: {
+    screen: EateryStack,
+    navigationOptions: {
+      drawerLabel: 'Eateries',
+    }
+  },
 });
-
-
 
 
 export default createAppContainer(MainDrawerNavigator);

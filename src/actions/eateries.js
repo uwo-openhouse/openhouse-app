@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import { fetchEateries } from '../service/Eateries';
+import { fetchEateries } from '../service/eateries';
 
 export const getEateries = (openHouseId) => (dispatch) => {
     dispatch({
@@ -10,10 +10,7 @@ export const getEateries = (openHouseId) => (dispatch) => {
         .then((response) => {
             dispatch({
                 type: actionTypes.FETCH_EATERIES_SUCCESS,
-                payload: {
-                    Eateries: response,
-                    openHouseId,
-                },
+                payload: response,
             });
         })
         .catch((error) => {
