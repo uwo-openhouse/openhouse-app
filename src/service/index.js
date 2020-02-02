@@ -26,3 +26,5 @@ export const buildMap = (responseJson) => {
 export const getDefaultTimezone = () => DEFAULT_TIME_ZONE;
 
 export const formatTime = (time) => moment(time, 'H:m').format('h:mm A');
+
+export const format24Time = (time) => moment(time, 'H:m').format('h:mm');

@@ -8,22 +8,23 @@ import HomeScreen from "../containers/screens/HomeScreen";
 
 
 const MainDrawerNavigator = createDrawerNavigator({
-  Home: {
-    screen: HomeScreen
-  },
-  ScheduleStack: {
-    screen: ScheduleStack,
-    navigationOptions: {
-      drawerLabel: 'Schedule',
-    }
-  },
-  PlannerStack: {
-    screen: PlannerStack,
-    navigationOptions: {
-      drawerLabel: 'Planner',
-    }
-  },
-});
+    Home: {
+      screen: HomeScreen
+    },
+    ScheduleStack: {
+      screen: ScheduleStack,
+      navigationOptions: {
+        drawerLabel: 'Schedule',
+      }
+    },
+    PlannerStack: {
+      screen: PlannerStack,
+      navigationOptions: {
+        drawerLabel: 'Planner',
+      }
+    },
+  }
+);
 
 
 

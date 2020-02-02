@@ -8,19 +8,20 @@ import {
 import React from "react";
 import { Icon } from 'react-native-elements';
 import Colors from "../../constants/Colors";
+import Fonts from "../../constants/Fonts";
 import * as PropTypes from "prop-types";
-import {formatTime} from "../../service";
+import {format24Time as formatMinimalTime} from "../../service";
 
 const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
     return (
-        <View style={{marginVertical: 5}}>
+        <View style={{marginVertical: 0}}>
             <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
-                        <Text style={styles.time}>{formatTime(startTime)}</Text>
-                        <Icon name='minus' type="font-awesome" color="#999999"/>
-                        <Text style={styles.time}>{formatTime(endTime)}</Text>
+                        <Text style={styles.time}>{formatMinimalTime(startTime)}</Text>
+                        <Icon size={10} name='minus' type="font-awesome" color="#999999"/>
+                        <Text style={styles.time}>{formatMinimalTime(endTime)}</Text>
                     </View>
 
                     <View style={styles.itemContentContainer}>
@@ -60,7 +61,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#ffffff',
-        padding: 15,
+        paddingTop: 12,
+        paddingBottom: 12,
+        paddingHorizontal: 15,
 
         shadowColor: "#000",
         shadowOffset: {
@@ -75,38 +78,42 @@ const styles = StyleSheet.create({
 
     title: {
         flexGrow: 1,
-        fontSize: 24,
+        fontSize: 18,
+        fontFamily: Fonts.normalFont,
         color: Colors.westernPurple,
     },
     titleContainer: {
         display: 'flex',
         flexDirection: 'row',
-
     },
     itemContentContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'stretch',
         flex: 1,
-
+        
     },
     time: {
+        fontSize: 14,
         color:'#999999',
         textAlign: 'center',
     },
     timeContainer: {
-        marginRight: 8,
-        width: Dimensions.get('window').width*0.15,
+        marginRight: 16,
+        width: Dimensions.get('window').width*0.11,
+        
     },
 
     location: {
-        fontSize: 18,
+        fontSize: 16,
+        fontFamily: Fonts.normalFont,
         color: '#666666',
+        marginTop: 6,
     },
     categoryDot:{
         flexGrow: 0,
         flexShrink: 0,
-        top: 8,
+        top: 3,
         marginRight: 8,
         width: 16,
         height: 16,

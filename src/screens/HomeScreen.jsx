@@ -10,6 +10,7 @@ import CustomHeader from "../components/CustomHeader";
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-elements';
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   let messageTitle = ''
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 10,
     paddingHorizontal: 35,
-    fontFamily: 'bentonsans-bold',
+    fontFamily: Fonts.boldFont,
     fontSize: 22  ,
     lineHeight: 28,
   },
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   },
   messageBody: {
     lineHeight: 18,
-    fontFamily: 'bentonsans-book',
+    fontFamily: Fonts.normalFont,
     marginHorizontal: 16,
     paddingTop: 10,
     paddingBottom: 25,

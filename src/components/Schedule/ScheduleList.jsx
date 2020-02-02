@@ -9,6 +9,7 @@ import * as PropTypes from 'prop-types';
 import moment from "moment";
 import {formatTime} from "../../service";
 import ScheduleItem from "../../containers/Schedule/SchduleItem";
+import Fonts from "../../constants/Fonts";
 
 const timeCompare = (time1, time2) => {
     const parsedTime1 = moment(time1, 'H:m');
@@ -72,14 +73,15 @@ ScheduleList.propTypes = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 0,
+        marginTop: 5,
         marginHorizontal: 0,
     },
     header: {
-        fontSize: 20,
+        fontSize: 16,
         opacity: 0.5,
-        marginHorizontal: 10,
-        marginTop: 10,
+        marginHorizontal: 15,
+        marginVertical: 6,
+        fontFamily: Fonts.normalFont,
     },
 });
 
