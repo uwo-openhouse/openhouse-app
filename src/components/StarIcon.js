@@ -44,7 +44,7 @@ const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
             />
         </View>
     );
-}
+};
 
 StarIcon.propTypes = {
     isInPlanner: PropTypes.bool.isRequired,

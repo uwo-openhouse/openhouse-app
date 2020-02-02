@@ -30,14 +30,11 @@ const CustomHeader = ({navigation, title, children}) => {
 CustomHeader.propTypes = {
     navigation: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.node),
-        PropTypes.node
-    ]),
+    children: PropTypes.object.isRequired,
 };
 
 CustomHeader.defaultProps = {
-    children: null,
+    children: {},
 };
 
 
