@@ -3,6 +3,7 @@ import errorReducer, * as errors from './errors';
 import areaReducer, * as areas from './areas';
 import openHouseReducer, * as openHouses from './openHouses';
 import eventReducer, * as events from './events';
+import eateryReducer, * as eateries from './eateries';
 import plannerReducer, * as planner from './planner';
 
 export default {
@@ -10,6 +11,7 @@ export default {
     areas: areaReducer,
     openHouses: openHouseReducer,
     events: eventReducer,
+    eateries: eateryReducer,
     errors: errorReducer,
     planner: plannerReducer,
 };
@@ -39,6 +41,12 @@ export const isEventsLoaded = state => events.isLoaded(state.events);
 export const getAllEvents = state => events.getAllEvents(state.events);
 
 export const getEvent = (state, id) => events.getEvent(state.events, id);
+
+export const isEateriesLoaded = state => eateries.isLoaded(state.eateries);
+
+export const getAllEateries = state => eateries.getAllEateries(state.eateries);
+
+export const getEatery = (state, id) => eateries.getEatery(state.eateries, id);
 
 export const eventIsInPlanner = (state, id) => planner.eventIsInPlanner(state.planner, id);
 
