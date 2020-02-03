@@ -40,19 +40,16 @@ const EateryList = ({navigation, eateries}) => {
         return (<Text style={styles.header}>No Eateries</Text>);
     }
 
-    eateries.sort(sortEateries);
     const eateriesData = Object.entries(
         eateries.reduce((obj, eatery) => {
+            if (Object.entries(obj).length === 0 && obj.constructor === Object) {
+                obj['Open'] = [];
+                obj['Closed'] = [];
+            }
             if (isOpen(eatery)) {
-                if (!obj['Open']) {
-                    obj['Open'] = [];
-                }
                 obj['Open'].push(eatery);
             }
             else {
-                if (!obj['Closed']) {
-                    obj['Closed'] = [];
-                }
                 obj['Closed'].push(eatery);
             }
             return obj;
@@ -62,7 +59,6 @@ const EateryList = ({navigation, eateries}) => {
         title: status,
     }));
 
-    console.log(eateriesData);
     return (
         <SafeAreaView style={styles.container}>
             <SectionList

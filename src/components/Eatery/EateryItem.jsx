@@ -14,7 +14,7 @@ import {formatTime} from "../../service";
 const EateryItem = ({navigation, name, building, openTime, closeTime, uuid}) =>  {
     return (
         <View style={{marginVertical: 5}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { /*navigation.navigate('EventDetails', {eventID: uuid});*/}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EateryDetails', {eateryID: uuid});}}>
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
