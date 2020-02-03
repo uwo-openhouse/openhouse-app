@@ -4,13 +4,16 @@ import {sendAddToOpenHouse, sendAddToPlanner, sendRemoveFromPlanner} from "../se
 import moment from 'moment-timezone';
 import {getDefaultTimezone} from "../service";
 import {getNotificationID, getOpenHouse, isVisitingOpenHouse} from "../reducers";
+import {Platform} from "react-native";
 
-Notifications.createChannelAndroidAsync('UWO-open-house', {
-    name: 'UWO-open-house',
-    priority: 'max',
-    sound: true,
-    vibrate: true,
-});
+if (Platform.OS === 'android') {
+    Notifications.createChannelAndroidAsync('UWO-open-house', {
+        name: 'UWO-open-house',
+        priority: 'max',
+        sound: true,
+        vibrate: true,
+    });
+}
 
 export const addToPlanner = (event) => (dispatch, getState) => {
     const openHouse = getOpenHouse(getState());
@@ -63,7 +66,7 @@ export const addToPlanner = (event) => (dispatch, getState) => {
     }
 
     const requests = [sendAddToPlanner(event.uuid)];
-    if (!visitingOpenHouse){
+    if (!visitingOpenHouse) {
         requests.push(sendAddToOpenHouse(openHouse.uuid));
     }
     return Promise.all(requests)
@@ -80,19 +83,18 @@ export const removeFromPlanner = (eventID) => (dispatch, getState) => {
         },
     });
 
+    const dispatchRemove = () => dispatch({
+        type: actionTypes.REMOVE_EVENT_FROM_PLANNER,
+        payload: eventID,
+    });
+
     if (notificationID) {
         Notifications.cancelScheduledNotificationAsync(notificationID)
-            .then(() => dispatch({
-                type: actionTypes.REMOVE_EVENT_FROM_PLANNER,
-                payload: eventID,
-            })).catch(() => dispatch({
+            .then(dispatchRemove).catch(() => dispatch({
             type: actionTypes.REMOVE_EVENT_FROM_PLANNER_FAILURE,
         }));
     } else {
-        dispatch({
-            type: actionTypes.REMOVE_EVENT_FROM_PLANNER,
-            payload: eventID,
-        });
+        dispatchRemove();
     }
     return sendRemoveFromPlanner(eventID);
 };
