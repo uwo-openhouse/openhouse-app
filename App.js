@@ -14,6 +14,7 @@ import {getAreas} from "./src/actions/areas";
 import {getLocations} from "./src/actions/locations";
 import {getOpenHouse, hasOpenHouse} from "./src/reducers";
 import {getOpenHouses} from "./src/actions/openHouses";
+import ErrorPopup from "./src/containers/Errors/ErrorPopup";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -46,6 +47,7 @@ export default function App(props) {
                     <View style={styles.container}>
                         {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                         <AppNavigator/>
+                        <ErrorPopup/>
                     </View>
                 </PersistGate>
             </Provider>

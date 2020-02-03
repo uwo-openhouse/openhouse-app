@@ -16,6 +16,21 @@ export const sendAddToPlanner = (eventID) => {
         .then(handleRequestError);
 };
 
+export const sendAddToOpenHouse = (openHouseID) => {
+    const headers = new Headers({
+        'content-type': 'application/json',
+    });
+
+    return fetch(
+        `${getBackEndURL()}/openhouses/${openHouseID}/attendees`,
+        {
+            method: 'POST',
+            headers,
+        },
+    )
+        .then(handleRequestError);
+};
+
 export const sendRemoveFromPlanner = (eventID) => {
     const headers = new Headers({
         'content-type': 'application/json',
