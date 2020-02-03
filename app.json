@@ -27,7 +27,7 @@
       "package": "com.uwo.openhouse",
       "permissions": [
         "ACCESS_FINE_LOCATION"
-      ],
+      ]
     },
     "ios": {
       "supportsTablet": true,

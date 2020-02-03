@@ -1,12 +1,11 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
 import EventDetailsScreen from "../containers/screens/EventDetailsScreen";
-import ScheduleScreen from "../containers/screens/ScheduleScreen";
+import PlannerScreen from "../containers/screens/PlannerScreen";
 
-
-const EventStack = createStackNavigator({
-      Schedule: {
-        screen: ScheduleScreen,
+const PlannerStack = createStackNavigator({
+      Planner: {
+        screen: PlannerScreen,
         navigationOptions: {
           headerShown: false,
         }
@@ -15,7 +14,7 @@ const EventStack = createStackNavigator({
         screen: EventDetailsScreen
       },
     },{
-        initialRoutName: 'Schedule',
+        initialRoutName: 'Planner',
         defaultNavigationOptions: {
             header:null,
         },
@@ -23,4 +22,4 @@ const EventStack = createStackNavigator({
 );
 
 
-export default createAppContainer(EventStack);
+export default createAppContainer(PlannerStack);

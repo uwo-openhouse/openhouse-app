@@ -52,3 +52,7 @@ export const isVisitingOpenHouse = (state, openHouseId) => {
 export const getNotificationID = (state, eventID) => {
     return state.data.events.find(plannerEntry => plannerEntry.eventID === eventID).notificationID;
 };
+
+export const eventsInPlanner = (state) => {
+    return state.data.map(({eventID}) => eventID);
+};
