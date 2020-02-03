@@ -11,23 +11,10 @@ import moment from "moment";
 import {formatTime} from "../../service";
 import EateryItem from "../../containers/Eatery/EateryItem";
 
-const timeCompare = (time1, time2) => {
-    const parsedTime1 = moment(time1, 'H:m');
-    const parsedTime2 = moment(time2, 'H:m');
-
-    if (parsedTime1.isBefore(parsedTime2)){
-        return -1;
-    }
-    if (parsedTime1.isAfter(parsedTime2)){
-        return 1;
-    }
-    return 0;
-};
-
 const isOpen = (eatery) => {
     const parsedOpenTime = moment(eatery.openTime, 'H:m');
     const parsedCloseTime = moment(eatery.closeTime, 'H:m');
-    const parsedCurrentTime = moment(new Date().getDate(), 'H:m');
+    const parsedCurrentTime = moment(new Date(), 'H:m');
 
     if (parsedOpenTime.isAfter(parsedCurrentTime) && parsedCloseTime.isBefore(parsedCurrentTime)) {
         return true;
@@ -116,9 +103,9 @@ const styles = StyleSheet.create({
     },
     header: {
         fontSize: 20,
-        opacity: 0.5,
         marginHorizontal: 10,
         marginTop: 10,
+        color: "red"
     },
 });
 
