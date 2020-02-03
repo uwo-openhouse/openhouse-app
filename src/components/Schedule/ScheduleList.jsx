@@ -8,7 +8,7 @@ import {
 import * as PropTypes from 'prop-types';
 import moment from "moment";
 import {formatTime} from "../../service";
-import ScheduleItem from "../../containers/Schedule/SchduleItem";
+import ScheduleItem from "../../containers/Schedule/ScheduleItem";
 
 const timeCompare = (time1, time2) => {
     const parsedTime1 = moment(time1, 'H:m');

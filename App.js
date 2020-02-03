@@ -9,6 +9,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from "react-redux";
 import configureStore from "./src/configureStore";
 import {getEvents} from "./src/actions/events";
+import {getEateries} from "./src/actions/eateries";
 import {getAreas} from "./src/actions/areas";
 import {getLocations} from "./src/actions/locations";
 import {getOpenHouse, hasOpenHouse} from "./src/reducers";
@@ -39,6 +40,7 @@ export default function App(props) {
         });
         store.dispatch(getLocations());
         store.dispatch(getAreas());
+        store.dispatch(getEateries());
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
