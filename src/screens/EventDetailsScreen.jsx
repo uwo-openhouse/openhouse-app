@@ -1,21 +1,19 @@
 import React, {useRef} from 'react';
 import {
-    View,
     Text,
     StyleSheet,
     Dimensions,
     PermissionsAndroid,
     Platform,
-    Button,
     ScrollView
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Colors from "../constants/Colors";
-import { Header, Icon } from "react-native-elements";
+import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
-import Toast, {DURATION} from 'react-native-easy-toast';
+import Toast from 'react-native-easy-toast';
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
@@ -45,7 +43,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                     },
                 }}
                 rightComponent={
-                    <StarIcon toast={toast} isInPlanner={isInPlanner} add={addToPlanner} remove={removeFromPlanner} event={event} />
+                    <StarIcon toast={toast} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
                 }
                 statusBarProps={{ barStyle: "light-content" }}
                 containerStyle={{
