@@ -8,8 +8,6 @@ import {
 import EateryDetailsScreen from "../../screens/EateryDetailsScreen";
 import {connect} from "react-redux";
 import Loadable from "../../components/Loadable";
-import {addToPlanner, removeFromPlanner} from "../../actions/planner";
-import {bindActionCreators} from "redux";
 
 const mapStateToProps = (state, { navigation }) => {
     const eatery = getEatery(state, navigation.getParam('eateryID'));

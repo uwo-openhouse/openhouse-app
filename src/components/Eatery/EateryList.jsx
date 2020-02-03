@@ -3,12 +3,10 @@ import {
     StyleSheet,
     Text,
     SafeAreaView,
-    SectionList,
-    View
+    SectionList
 } from 'react-native';
 import * as PropTypes from 'prop-types';
 import moment from "moment";
-import {formatTime} from "../../service";
 import EateryItem from "../../containers/Eatery/EateryItem";
 
 const isOpen = (eatery) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import * as PropTypes from "prop-types";
 import EateryList from "../components/Eatery/EateryList";
@@ -7,8 +7,7 @@ import EateryList from "../components/Eatery/EateryList";
 const EateryScreen = ({navigation, eateries}) => {
     return (
         <View style={styles.container}>
-            <CustomHeader navigation={navigation} title="Eateries">
-            </CustomHeader>
+            <CustomHeader navigation={navigation} title="Eateries"/>
             <EateryList navigation={navigation} eateries={eateries}/>
         </View>
     );
