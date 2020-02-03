@@ -5,6 +5,8 @@ import moment from 'moment-timezone';
 import {getDefaultTimezone} from "../service";
 import {getNotificationID, getOpenHouse, isVisitingOpenHouse} from "../reducers";
 import {Platform} from "react-native";
+import * as Permissions from 'expo-permissions';
+
 
 if (Platform.OS === 'android') {
     Notifications.createChannelAndroidAsync('UWO-open-house', {
@@ -13,6 +15,9 @@ if (Platform.OS === 'android') {
         sound: true,
         vibrate: true,
     });
+}
+else if (Platform.OS === 'ios') {
+    Permissions.askAsync(Permissions.NOTIFICATIONS);
 }
 
 export const addToPlanner = (event) => (dispatch, getState) => {
