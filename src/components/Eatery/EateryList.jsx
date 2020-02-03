@@ -16,12 +16,7 @@ const isOpen = (eatery) => {
     const parsedCloseTime = moment(eatery.closeTime, 'H:m');
     const parsedCurrentTime = moment(new Date(), 'H:m');
 
-    if (parsedOpenTime.isAfter(parsedCurrentTime) && parsedCloseTime.isBefore(parsedCurrentTime)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return parsedOpenTime.isSameOrBefore(parsedCurrentTime) && parsedCloseTime.isSameOrAfter(parsedCurrentTime);
 };
 
 const sortEateries = (a, b) => {
@@ -75,7 +70,7 @@ const EateryList = ({navigation, eateries}) => {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({item}) => <EateryItem id={item.id} navigation={navigation} {...item}/>}
                 renderSectionHeader={({section: {title}}) => (
-                    <Text style={styles.header}>{title}</Text>
+                    <Text style={[styles.header, title === 'Open' ? styles.open : styles.closed]}>{title}</Text>
                 )}
             />
         </SafeAreaView>
@@ -105,7 +100,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginHorizontal: 10,
         marginTop: 10,
-        color: "red"
+    },
+    open: {
+        color: "green",
+    },
+    closed: {
+        color: "red",
     },
 });
 
