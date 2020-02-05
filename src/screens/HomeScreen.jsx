@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.westernPurple,
     textAlign: 'center',
     paddingTop: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingHorizontal: 35,
     fontFamily: Fonts.boldFont,
     fontSize: 22  ,
