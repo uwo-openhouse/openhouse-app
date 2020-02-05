@@ -6,6 +6,7 @@ import PlannerStack from "./PlannerStackNavigator";
 import ScheduleStack from "./ScheduleStackNavigator";
 import HomeScreen from "../containers/screens/HomeScreen";
 
+import Colours from "../constants/Colors"
 
 const MainDrawerNavigator = createDrawerNavigator({
     Home: {
@@ -23,6 +24,10 @@ const MainDrawerNavigator = createDrawerNavigator({
         drawerLabel: 'Planner',
       }
     },
+  },{
+    contentOptions:{
+      activeTintColor: Colours.westernPurple
+    }
   }
 );
 
