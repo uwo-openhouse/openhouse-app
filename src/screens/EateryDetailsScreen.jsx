@@ -14,6 +14,7 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Colors from "../constants/Colors";
 import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
+import BuildingMaps from "../components/BuildingMaps";
 
 const EateryDetailsScreen = ({navigation, building, eatery}) => {
     const loc = {
@@ -47,26 +48,7 @@ const EateryDetailsScreen = ({navigation, building, eatery}) => {
                 }}
             />
             <Text style={styles.location}>Location: {building.name}</Text>
-            <MapView
-            provider={PROVIDER_GOOGLE}
-            style={styles.mapStyle}
-            initialRegion={{
-                latitude: loc.latitude,
-                longitude: loc.longitude,
-                latitudeDelta: 0.004,
-                longitudeDelta: 0.002,
-            }}
-            onMapReady={() => {
-            }}
-            onUserLocationChange={(location) => {console.log(location)}}
-            loadingEnabled
-            showsUserLocation
-            showsMyLocationButton
-            >
-                <Marker
-                coordinate={loc}
-                />
-            </MapView>
+            <BuildingMaps loc={loc}/>
         </ScrollView>
     );
 };

@@ -13,6 +13,7 @@ import Colors from "../constants/Colors";
 import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
+import BuildingMaps from "../components/BuildingMaps";
 import Toast from 'react-native-easy-toast';
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
@@ -53,26 +54,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             />
             <Text style={styles.location}>Location: {building.name}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
-            <MapView
-            provider={PROVIDER_GOOGLE}
-            style={styles.mapStyle}
-            initialRegion={{
-                latitude: loc.latitude,
-                longitude: loc.longitude,
-                latitudeDelta: 0.004,
-                longitudeDelta: 0.002,
-            }}
-            onMapReady={() => {
-            }}
-            onUserLocationChange={(location) => {console.log(location)}}
-            loadingEnabled
-            showsUserLocation
-            showsMyLocationButton
-            >
-                <Marker
-                coordinate={loc}
-                />
-            </MapView>
+            <BuildingMaps loc={loc}/>
             <Toast
                 ref={toast}
                 position='bottom'
