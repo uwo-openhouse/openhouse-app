@@ -84,8 +84,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    borderTopColor: 'white',
-    borderTopWidth: 5,
     backgroundColor: Colors.westernPurple,
     textAlign: 'center',
     paddingTop: 20,
