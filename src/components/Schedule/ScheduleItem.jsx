@@ -10,7 +10,7 @@ import { Icon } from 'react-native-elements';
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 import * as PropTypes from "prop-types";
-import {format24Time as formatMinimalTime} from "../../service";
+import {formatTime} from "../../service";
 
 const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
     return (
@@ -19,9 +19,9 @@ const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, e
                 <View style={styles.item}>
 
                     <View style={styles.timeContainer}>
-                        <Text style={styles.time}>{formatMinimalTime(startTime)}</Text>
+                        <Text style={styles.time}>{formatTime(startTime)}</Text>
                         <Icon size={10} name='minus' type="font-awesome" color="#999999"/>
-                        <Text style={styles.time}>{formatMinimalTime(endTime)}</Text>
+                        <Text style={styles.time}>{formatTime(endTime)}</Text>
                     </View>
 
                     <View style={styles.itemContentContainer}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     timeContainer: {
         marginRight: 16,
-        width: Dimensions.get('window').width*0.11,
+        width: Dimensions.get('window').width*0.15,
         
     },
 
