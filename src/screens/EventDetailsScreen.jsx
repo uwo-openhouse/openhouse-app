@@ -31,6 +31,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
         <ScrollView
             style={styles.container}
             stickyHeaderIndices={[0]}
+            contentContainerStyle={{flexGrow: 1}}
         >
             <Header
                 leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
@@ -74,6 +75,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             </MapView>
             <Toast
                 ref={toast}
+                position='bottom'
                 style={styles.toast}
             />
         </ScrollView>
