@@ -94,10 +94,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: Colors.westernPurple,
     },
-    mapStyle: {
-        marginBottom: 20,
-        marginHorizontal: 20,
-        width: Dimensions.get('window').width - 40,
-        height: Dimensions.get('window').height / 2 - 20,
-    },
 });
