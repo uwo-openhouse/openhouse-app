@@ -15,6 +15,7 @@ import { HeaderBackButton } from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
 import BuildingMaps from "../components/BuildingMaps";
 import Toast from 'react-native-easy-toast';
+import {formatTime} from "../service";
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
@@ -52,7 +53,8 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                     backgroundColor: Colors.westernPurple,
                 }}
             />
-            <Text style={styles.location}>Location: {building.name}</Text>
+            <Text style={styles.details}>Location: {building.name}</Text>
+            <Text style={styles.details}>Time: {formatTime(event.startTime)} - {formatTime(event.endTime)}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
             <BuildingMaps loc={loc}/>
             <Toast
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: '#E5E5E5',
     },
-    location: {
+    details: {
         flex: 1,
         marginTop: 20,
         marginHorizontal: 20,
