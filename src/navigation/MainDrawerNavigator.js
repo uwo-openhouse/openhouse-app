@@ -6,6 +6,7 @@ import PlannerStack from "./PlannerStackNavigator";
 import ScheduleStack from "./ScheduleStackNavigator";
 import EateryStack from "./EateryStackNavigator";
 import HomeScreen from "../containers/screens/HomeScreen";
+import AboutScreen from "../screens/AboutScreen";
 
 
 const MainDrawerNavigator = createDrawerNavigator({
@@ -29,6 +30,9 @@ const MainDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'Eateries',
     }
+  },
+  About: {
+    screen: AboutScreen,
   },
 });
 
