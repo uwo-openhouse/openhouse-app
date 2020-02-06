@@ -9,6 +9,7 @@ import * as PropTypes from 'prop-types';
 import moment from "moment";
 import {formatTime} from "../../service";
 import ScheduleItem from "../../containers/Schedule/ScheduleItem";
+import SectionListStyle from "../../constants/Styles";
 
 const timeCompare = (time1, time2) => {
     const parsedTime1 = moment(time1, 'H:m');
@@ -25,7 +26,7 @@ const timeCompare = (time1, time2) => {
 
 const ScheduleList = ({navigation, events}) => {
     if (events.length === 0){
-        return (<Text style={styles.header}>No Events</Text>);
+        return (<Text style={SectionListStyle.emptyListMsg}>No Events</Text>);
     }
     const eventData = Object.entries(
         events.reduce((obj, event) => {
@@ -47,7 +48,7 @@ const ScheduleList = ({navigation, events}) => {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({item}) => <ScheduleItem id={item.id} navigation={navigation} {...item} />}
                 renderSectionHeader={({section: {title}}) => (
-                    <Text style={styles.header}>{title}</Text>
+                    <Text style={SectionListStyle.header}>{title}</Text>
                 )}
             />
         </SafeAreaView>
@@ -72,14 +73,8 @@ ScheduleList.propTypes = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 0,
+        marginTop: 5,
         marginHorizontal: 0,
-    },
-    header: {
-        fontSize: 20,
-        opacity: 0.5,
-        marginHorizontal: 10,
-        marginTop: 10,
     },
 });
 

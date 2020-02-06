@@ -3,7 +3,8 @@ import {
 	ActionSheetIOS,
 	Picker,
 	Platform,
-	StyleSheet
+    StyleSheet,
+    View
 } from 'react-native';
 import { Icon } from "react-native-elements";
 import * as PropTypes from "prop-types";
@@ -42,18 +43,27 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
     }
     else {
         return (
-            <Picker
-                selectedValue={filter}
-                prompt="Filter"
-                mode="dialog"
-                style={styles.dropdown}
-                onValueChange={(value) => setFilter(value)}
-            >
-                <Picker.Item value={noFilterName} label="Show All"/>
-                {areas.map(({uuid, name, color}) => (
-                    <Picker.Item color={color} key={`filter-area-${uuid}`} value={uuid} label={name}/>
-                ))}
-            </Picker>
+            <View> 
+                <Icon 
+                    name="filter-list"
+                    size={30}
+                    color="#FFFFFF"
+                    containerStyle={styles.pickerIcon}
+                    underlayColor={Colors.westernPurple}>
+                </Icon>
+                <Picker
+                    selectedValue={filter}
+                    prompt="Filter"
+                    mode="dialog"
+                    style={styles.dropdown}
+                    onValueChange={(value) => setFilter(value)}
+                >
+                    <Picker.Item value={noFilterName} label="Show All"/>
+                    {areas.map(({uuid, name, color}) => (
+                        <Picker.Item color={color} key={`filter-area-${uuid}`} value={uuid} label={name}/>
+                    ))}
+                </Picker>
+            </View>
         );
     }
 };
@@ -76,7 +86,12 @@ AreaFilter.propTypes = {
 const styles = StyleSheet.create({
     dropdown: {
         flex: 1,
-        width: 150,
-        color: 'white',
-    }
+        width: 45,
+        opacity: 0,
+    },
+    pickerIcon: {
+        position: "absolute",
+        top: 12,
+        right: 10,
+     }, 
 });

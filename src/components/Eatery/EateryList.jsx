@@ -8,6 +8,7 @@ import {
 import * as PropTypes from 'prop-types';
 import moment from "moment";
 import EateryItem from "../../containers/Eatery/EateryItem";
+import SectionListStyle from "../../constants/Styles";
 
 const isOpen = (eatery) => {
     const parsedOpenTime = moment(eatery.openTime, 'H:m');
@@ -35,7 +36,7 @@ const sortEateries = (a, b) => {
 
 const EateryList = ({navigation, eateries}) => {
     if (eateries.length === 0){
-        return (<Text style={styles.header}>No Eateries</Text>);
+        return (<Text style={SectionListStyle.emptyListMsg}>No Eateries</Text>);
     }
 
     const eateriesData = Object.entries(
@@ -64,7 +65,7 @@ const EateryList = ({navigation, eateries}) => {
                 keyExtractor={(item, index) => item + index}
                 renderItem={({item}) => <EateryItem id={item.id} navigation={navigation} {...item}/>}
                 renderSectionHeader={({section: {title}}) => (
-                    <Text style={[styles.header, title === 'Open' ? styles.open : styles.closed]}>{title}</Text>
+                    <Text style={[SectionListStyle.header, title === 'Open' ? styles.open : styles.closed]}>{title}</Text>
                 )}
             />
         </SafeAreaView>
@@ -89,11 +90,6 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 0,
         marginHorizontal: 0,
-    },
-    header: {
-        fontSize: 20,
-        marginHorizontal: 10,
-        marginTop: 10,
     },
     open: {
         color: "green",
