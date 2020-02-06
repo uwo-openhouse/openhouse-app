@@ -40,6 +40,9 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
             <Button buttonStyle={styles.navButton} 
                     title="Planner" 
                     onPress={() => navigation.navigate('Planner')}></Button>
+            <Button buttonStyle={styles.navButton} 
+                    title="Eateries" 
+                    onPress={() => navigation.navigate('Eateries')}></Button>
           </View>
         </ScrollView>
       </View>

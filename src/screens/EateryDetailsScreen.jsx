@@ -1,10 +1,12 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {
+    View,
     Text,
     StyleSheet,
     Dimensions,
     PermissionsAndroid,
     Platform,
+    Button,
     ScrollView
 } from 'react-native';
 import * as PropTypes from "prop-types";
@@ -12,10 +14,8 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Colors from "../constants/Colors";
 import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
-import StarIcon from "../components/StarIcon";
-import Toast from 'react-native-easy-toast';
 
-const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
+const EateryDetailsScreen = ({navigation, building, eatery}) => {
     const loc = {
         latitude: building.position.lat,
         longitude: building.position.lng,
@@ -25,7 +25,6 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
     }
-    const toast = useRef(null);
 
     return (
         <ScrollView
@@ -35,23 +34,19 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             <Header
                 leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
                 centerComponent={{
-                    text: event.name,
+                    text: eatery.name,
                     style: {
                       color: "#fff",
                       fontSize: 20,
                       fontFamily:'bentonsans-bold',
                     },
                 }}
-                rightComponent={
-                    <StarIcon toast={toast} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
-                }
                 statusBarProps={{ barStyle: "light-content" }}
                 containerStyle={{
                     backgroundColor: Colors.westernPurple,
                 }}
             />
             <Text style={styles.location}>Location: {building.name}</Text>
-            <Text style={styles.description}>Description: {event.description}</Text>
             <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.mapStyle}
@@ -72,21 +67,17 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                 coordinate={loc}
                 />
             </MapView>
-            <Toast
-                ref={toast}
-                style={styles.toast}
-            />
         </ScrollView>
     );
 };
 
-EventDetailsScreen.navigationOptions = ({navigation}) => {
+EateryDetailsScreen.navigationOptions = ({navigation}) => {
     return {
         title: navigation.getParam('name'),
     };
 };
 
-EventDetailsScreen.propTypes = {
+EateryDetailsScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
     building: PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -96,23 +87,16 @@ EventDetailsScreen.propTypes = {
         }),
         uuid: PropTypes.string.isRequired,
     }),
-    event: PropTypes.shape({
-        area: PropTypes.string.isRequired,
+    eatery: PropTypes.shape({
         building: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
+        closeTime: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        openHouse: PropTypes.string.isRequired,
-        room: PropTypes.string.isRequired,
-        startTime: PropTypes.string.isRequired,
-        endTime: PropTypes.string.isRequired,
+        openTime: PropTypes.string.isRequired,
         uuid: PropTypes.string.isRequired,
     }),
-    isInPlanner: PropTypes.bool.isRequired,
-    addToPlanner: PropTypes.func.isRequired,
-    removeFromPlanner: PropTypes.func.isRequired,
 };
 
-export default EventDetailsScreen;
+export default EateryDetailsScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -124,15 +108,8 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 20,
         marginHorizontal: 20,
-        fontSize: 20,
-        color: Colors.westernPurple,
-    },
-    description: {
-        marginTop: 20,
         marginBottom: 20,
-        marginHorizontal: 20,
         fontSize: 20,
-        flex: 5,
         color: Colors.westernPurple,
     },
     mapStyle: {
@@ -140,8 +117,5 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         width: Dimensions.get('window').width - 40,
         height: Dimensions.get('window').height / 2 - 20,
-    },
-    toast: {
-        width: Dimensions.get('window').width*3/4,
     },
 });

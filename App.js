@@ -9,10 +9,12 @@ import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from "react-redux";
 import configureStore from "./src/configureStore";
 import {getEvents} from "./src/actions/events";
+import {getEateries} from "./src/actions/eateries";
 import {getAreas} from "./src/actions/areas";
 import {getLocations} from "./src/actions/locations";
 import {getOpenHouse, hasOpenHouse} from "./src/reducers";
 import {getOpenHouses} from "./src/actions/openHouses";
+import ErrorPopup from "./src/containers/Errors/ErrorPopup";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -38,12 +40,14 @@ export default function App(props) {
         });
         store.dispatch(getLocations());
         store.dispatch(getAreas());
+        store.dispatch(getEateries());
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <View style={styles.container}>
                         {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                         <AppNavigator/>
+                        <ErrorPopup/>
                     </View>
                 </PersistGate>
             </Provider>
