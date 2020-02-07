@@ -71,6 +71,7 @@ async function loadResourcesAsync() {
             'bentonsans-medium': require('./src/assets/fonts/BentonSans-Medium.otf'),
             'bentonsans-book': require('./src/assets/fonts/BentonSans-Book.otf'),
             'bentonsans-bold': require('./src/assets/fonts/BentonSans-Bold.otf'),
+            'bentonsans-regular': require('./src/assets/fonts/BentonSans-Regular.otf'),
         }),
     ]);
 }

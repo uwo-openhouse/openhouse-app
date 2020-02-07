@@ -10,6 +10,7 @@ import CustomHeader from "../components/CustomHeader";
 import { ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-elements';
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   let messageTitle = '';
@@ -39,6 +40,9 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
             <Button buttonStyle={styles.navButton}
                     title="Planner"
                     onPress={() => navigation.navigate('Planner')} />
+            <Button buttonStyle={styles.navButton}
+                    title="Eateries"
+                    onPress={() => navigation.navigate('Eateries')} />
           </View>
         </ScrollView>
       </View>
@@ -71,14 +75,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    borderTopColor: 'white',
-    borderTopWidth: 5,
     backgroundColor: Colors.westernPurple,
     textAlign: 'center',
     paddingTop: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingHorizontal: 35,
-    fontFamily: 'bentonsans-bold',
+    fontFamily: Fonts.boldFont,
     fontSize: 22  ,
     lineHeight: 28,
   },
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   },
   messageBody: {
     lineHeight: 18,
-    fontFamily: 'bentonsans-book',
+    fontFamily: Fonts.normalFont,
     marginHorizontal: 16,
     paddingTop: 10,
     paddingBottom: 25,
