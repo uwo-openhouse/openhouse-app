@@ -1,27 +1,30 @@
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import CustomHeader from "../components/CustomHeader";
 import contributors from "../constants/contributors";
 import React from "react";
 import {Linking} from 'expo';
-import {Icon} from "react-native-elements";
-
+import {Button, Icon} from "react-native-elements";
+import Colors from "../constants/Colors";
 
 
 const AboutScreen = ({navigation}) => (
     <View style={styles.container}>
         <CustomHeader navigation={navigation} title="About"/>
         <View style={styles.body}>
-            <Text style={[styles.text, styles.underLinedText, styles.paddedText]}>This app was developed by students for Computer Science 4470Y</Text>
-            <View style={styles.contributorList}>
-                <Text style={[styles.contributorListHeader, styles.text,  styles.paddedText]}>Contributors</Text>
+            <Text style={[styles.text, styles.underLinedText, styles.paddedText, styles.header]}>This app was developed
+                by 4th-year students as their capstone project for Computer Science 4470Y.</Text>
+            <View style={[styles.contributorList, styles.underLinedText]}>
+                <Text style={[styles.contributorListHeader, styles.text, styles.paddedText]}>Contributors</Text>
                 {contributors.map((contributor, index) => (
                     <Text key={index} style={[styles.contributor, styles.text]}>{contributor}</Text>
                 ))}
             </View>
-            <TouchableOpacity style={[styles.githubLink]} onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}>
-                <Icon style={styles.githubIcon} name='github' type="font-awesome" color="#999999"/>
-                <Text style={[styles.githubLinkText, styles.text]}>Check us out on Github</Text>
-            </TouchableOpacity>
+            <Button
+                buttonStyle={styles.githubButton}
+                title="Check us out on Github"
+                icon={(<Icon iconStyle={styles.githubIcon} name='github' type="font-awesome" color="white"/>)}
+                onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}
+            />
         </View>
     </View>
 );
@@ -48,25 +51,22 @@ const styles = StyleSheet.create({
         width: '50%',
         marginBottom: 20,
     },
-    githubIcon: {
-        marginRight: 10,
-    },
-    githubLink: {
-        flex: 1,
-        alignContent: 'center',
-        justifyContent: 'center',
-        borderTopWidth: 1,
+    githubButton: {
+        backgroundColor: Colors.westernPurple,
+        borderRadius: 25,
+        marginTop: 10,
+        marginBottom: 10,
         marginHorizontal: 16,
-        borderColor: '#999',
     },
-    githubLinkText: {
-        alignSelf: 'center',
+    githubIcon:{
+        marginRight: 5,
+        paddingRight: 4,
     },
     underLinedText: {
         borderColor: '#999',
         borderBottomWidth: 1,
     },
-    paddedText:{
+    paddedText: {
         paddingTop: 10,
         paddingBottom: 25,
         marginBottom: 10,
@@ -75,7 +75,9 @@ const styles = StyleSheet.create({
     text: {
         lineHeight: 18,
         fontFamily: 'bentonsans-book',
-
+    },
+    header: {
+        paddingTop: 15
     },
     body: {
         flex: 1,

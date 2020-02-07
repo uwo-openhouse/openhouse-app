@@ -12,7 +12,7 @@ import { Button } from 'react-native-elements';
 import Colors from "../constants/Colors";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
-  let messageTitle = ''
+  let messageTitle = '';
   let messageBody = 'No open house right now please check back later';
 
   if (hasOpenHouse){
@@ -25,7 +25,7 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
         <CustomHeader navigation={navigation} title="Home" />
         <ScrollView>
           <View style={{height:250,}}>
-            <Image   
+            <Image
               style={styles.image}
               source={require('../assets/images/MBOHbanner.png')}>
             </Image>
@@ -33,28 +33,16 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
           <Text style={styles.title}>{messageTitle}</Text>
           <View style={styles.content} >
             <Text style={styles.messageBody}>{messageBody}</Text>
-            <Button buttonStyle={styles.navButton} 
-                    title="Schedule" 
-                    onPress={() => navigation.navigate('Schedule')}></Button>
-            <Button buttonStyle={styles.navButton} 
-                    title="Planner" 
-                    onPress={() => navigation.navigate('Planner')}></Button>
+            <Button buttonStyle={styles.navButton}
+                    title="Schedule"
+                    onPress={() => navigation.navigate('Schedule')} />
+            <Button buttonStyle={styles.navButton}
+                    title="Planner"
+                    onPress={() => navigation.navigate('Planner')} />
           </View>
         </ScrollView>
       </View>
   );
-};
-
-
-HomeScreen.navigationOptions = {
-
-  drawerLabel: 'Home',
-  drawerIcon: () => (
-      <Image
-          source={require('../assets/images/robot-dev.png')}
-          style={{width: 50, height: 50}}
-      />
-  ),
 };
 
 HomeScreen.propTypes = {
