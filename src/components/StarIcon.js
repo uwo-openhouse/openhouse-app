@@ -1,27 +1,26 @@
 import React, {useState, useRef} from 'react';
 import {
-    Dimensions,
     StyleSheet,
-    Platform,
     Text,
     View
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import { Icon } from "react-native-elements";
+import CustomIcon from "./CustomIcon";
 import Toast, {DURATION} from 'react-native-easy-toast';
 
 import Colors from "../constants/Colors";
 
 const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
-    const border = {name: "star-border", check: false};
-    const full = {name: "star", check: true};
+    const addIcon = {name: "event-add", check: false};
+    const cancelIcon = {name: "event-cancel", check: true};
 
-    const star = isInPlanner ? full : border;
+    const star = isInPlanner ? cancelIcon : addIcon;
     const [icon, setIcon] = useState(star);
 
     return (
         <View>
-            <Icon
+            <CustomIcon
                 name={icon.name}
                 size={30}
                 color="#FFFFFF"
@@ -33,12 +32,12 @@ const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
                     if (star.check) {
                         remove(event);
                         toast.current.show(<Text style={styles.toastText} >Event has been removed from your planner.</Text>);
-                        setIcon(border);
+                        setIcon(addIcon);
                     }
                     else {
                         add(event);
                         toast.current.show(<Text style={styles.toastText} >Event has been added to your planner.</Text>);
-                        setIcon(full);
+                        setIcon(cancelIcon);
                     }
                 }}
             />
