@@ -3,6 +3,7 @@ import errorReducer, * as errors from './errors';
 import areaReducer, * as areas from './areas';
 import openHouseReducer, * as openHouses from './openHouses';
 import eventReducer, * as events from './events';
+import eateryReducer, * as eateries from './eateries';
 import plannerReducer, * as planner from './planner';
 
 export default {
@@ -10,6 +11,7 @@ export default {
     areas: areaReducer,
     openHouses: openHouseReducer,
     events: eventReducer,
+    eateries: eateryReducer,
     errors: errorReducer,
     planner: plannerReducer,
 };
@@ -28,6 +30,8 @@ export const getArea = (state, id) => areas.getArea(state.areas, id);
 
 export const getErrors = state => errors.getErrors(state.errors);
 
+export const hasErrors = state => errors.hasErrors(state.errors);
+
 export const isOpenHousesLoaded = state => openHouses.isLoaded(state.openHouses);
 
 export const hasOpenHouse = state => openHouses.hasOpenHouse(state.openHouses);
@@ -40,6 +44,16 @@ export const getAllEvents = state => events.getAllEvents(state.events);
 
 export const getEvent = (state, id) => events.getEvent(state.events, id);
 
+export const isEateriesLoaded = state => eateries.isLoaded(state.eateries);
+
+export const getAllEateries = state => eateries.getAllEateries(state.eateries);
+
+export const getEatery = (state, id) => eateries.getEatery(state.eateries, id);
+
 export const eventIsInPlanner = (state, id) => planner.eventIsInPlanner(state.planner, id);
 
-export const getEventsInPlanner = state => planner.eventsInPlanner(state.planner);
+export const getAllEventsInPlanner = state => planner.getAllEventsInPlanner(state.planner);
+
+export const isVisitingOpenHouse = (state, openHouseID) => planner.isVisitingOpenHouse(state.planner, openHouseID);
+
+export const getNotificationID = (state, eventID)  => planner.getNotificationID(state.planner, eventID);

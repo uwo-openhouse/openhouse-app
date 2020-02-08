@@ -10,24 +10,23 @@ import ListItemStyle from "../../constants/Styles";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
 
-const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
+const EateryItem = ({navigation, name, building, openTime, closeTime, uuid}) =>  {
     return (
-        <View style={{marginVertical: 0}}>
-            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
+        <View style={{marginVertical: 5}}>
+            <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EateryDetails', {eateryID: uuid});}}>
                 <View style={ListItemStyle.item}>
 
                     <View style={ListItemStyle.timeContainer}>
-                        <Text style={ListItemStyle.time}>{formatTime(startTime)}</Text>
+                        <Text style={ListItemStyle.time}>{formatTime(openTime)}</Text>
                         <Icon size={10} name='minus' type="font-awesome" color="#999999"/>
-                        <Text style={ListItemStyle.time}>{formatTime(endTime)}</Text>
+                        <Text style={ListItemStyle.time}>{formatTime(closeTime)}</Text>
                     </View>
 
                     <View style={ListItemStyle.itemContentContainer}>
                         <View style={ListItemStyle.titleContainer}>
-                            <View style={[ListItemStyle.categoryDot, {backgroundColor: areaColor}]}/>
                             <Text style={ListItemStyle.title}>{name}</Text>
                         </View>
-                        <Text style={ListItemStyle.location}>{building.name} {room}</Text>
+                        <Text style={ListItemStyle.location}>{building.name}</Text>
                     </View>
 
                 </View>
@@ -36,13 +35,11 @@ const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, e
     );
 };
 
-ScheduleItem.propTypes = {
+EateryItem.propTypes = {
     navigation: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    startTime: PropTypes.string.isRequired,
-    endTime: PropTypes.string.isRequired,
-    room: PropTypes.string.isRequired,
-    areaColor: PropTypes.string.isRequired,
+    openTime: PropTypes.string.isRequired,
+    closeTime: PropTypes.string.isRequired,
     building: PropTypes.shape({
         name: PropTypes.string.isRequired,
         position: PropTypes.shape({
@@ -54,4 +51,4 @@ ScheduleItem.propTypes = {
     uuid:PropTypes.string.isRequired,
 };
 
-export default ScheduleItem;
+export default EateryItem;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, Picker} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
+import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 
 //Note based off thr Schedule Screen
@@ -12,18 +13,7 @@ const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
     return (
         <View style={styles.container}>
             <CustomHeader navigation={navigation} title="Planner">
-                <Picker
-                    selectedValue={filter}
-                    prompt="Filter"
-                    mode="dialog"
-                    style={styles.dropdown}
-                    onValueChange={(value) => setFilter(value)}
-                >
-                    <Picker.Item value={noFilterName} label="Show All"/>
-                    {areas.map(({uuid, name, color}) => (
-                        <Picker.Item color={color} key={`filter-area-${uuid}`} value={uuid} label={name}/>
-                    ))}
-                </Picker>
+                <AreaFilter areas={areas} filter={filter} setFilter={setFilter} noFilterName={noFilterName}/>
             </CustomHeader>
             <ScheduleList navigation={navigation} events={events.filter(({area, uuid}) => (eventsInPlanner.includes(uuid) && (area === filter || filter === noFilterName)) )}/>
         </View>

@@ -25,5 +25,6 @@ export default function configureStore() {
     const middleware = composeEnhancers(applyMiddleware(thunk, promise, logger));
     const store = createStore(reducer, middleware);
     const persistor = persistStore(store);
+    persistor.purge() 
     return {store, persistor};
 }
