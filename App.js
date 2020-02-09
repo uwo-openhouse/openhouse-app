@@ -15,6 +15,7 @@ import {getLocations} from "./src/actions/locations";
 import {getOpenHouse, hasOpenHouse} from "./src/reducers";
 import {getOpenHouses} from "./src/actions/openHouses";
 import ErrorPopup from "./src/containers/Errors/ErrorPopup";
+import Loading from "./src/components/Loading";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -43,7 +44,7 @@ export default function App(props) {
         store.dispatch(getEateries());
         return (
             <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
+                <PersistGate loading={(<Loading/>)} persistor={persistor}>
                     <View style={styles.container}>
                         {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                         <AppNavigator/>
