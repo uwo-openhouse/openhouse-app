@@ -6,7 +6,7 @@ import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
 
-//Note based off thr Schedule Screen
+//Note based off the Schedule Screen
 
 const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
     const noFilterName = 'None';
