@@ -14,7 +14,7 @@ import Fonts from "../constants/Fonts";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
   let messageTitle = ''
-  let messageBody = 'No open house right now please check back later';
+  let messageBody = 'Currently there is no open house right now. Please check back later';
 
   if (hasOpenHouse){
     messageBody = `We are delighted you have decided to attend ${openHouse.name}. Today, you have the opportunity to meet with professors, staff and students to learn why Western offers the best student experience among Canadian universities.`;
