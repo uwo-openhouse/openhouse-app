@@ -13,7 +13,9 @@ import Colors from "../constants/Colors";
 import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
+import BuildingMaps from "../components/BuildingMaps";
 import Toast from 'react-native-easy-toast';
+import {formatTime} from "../service";
 
 const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
     const loc = {
@@ -31,6 +33,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
         <ScrollView
             style={styles.container}
             stickyHeaderIndices={[0]}
+            contentContainerStyle={{flexGrow: 1}}
         >
             <Header
                 leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
@@ -50,30 +53,13 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                     backgroundColor: Colors.westernPurple,
                 }}
             />
-            <Text style={styles.location}>Location: {building.name}</Text>
+            <Text style={styles.details}>Location: {building.name}</Text>
+            <Text style={styles.details}>Time: {formatTime(event.startTime)} - {formatTime(event.endTime)}</Text>
             <Text style={styles.description}>Description: {event.description}</Text>
-            <MapView
-            provider={PROVIDER_GOOGLE}
-            style={styles.mapStyle}
-            initialRegion={{
-                latitude: loc.latitude,
-                longitude: loc.longitude,
-                latitudeDelta: 0.004,
-                longitudeDelta: 0.002,
-            }}
-            onMapReady={() => {
-            }}
-            onUserLocationChange={(location) => {console.log(location)}}
-            loadingEnabled
-            showsUserLocation
-            showsMyLocationButton
-            >
-                <Marker
-                coordinate={loc}
-                />
-            </MapView>
+            <BuildingMaps loc={loc}/>
             <Toast
                 ref={toast}
+                position='bottom'
                 style={styles.toast}
             />
         </ScrollView>
@@ -120,7 +106,7 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: '#E5E5E5',
     },
-    location: {
+    details: {
         flex: 1,
         marginTop: 20,
         marginHorizontal: 20,
@@ -134,12 +120,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         flex: 5,
         color: Colors.westernPurple,
-    },
-    mapStyle: {
-        marginBottom: 20,
-        marginHorizontal: 20,
-        width: Dimensions.get('window').width - 40,
-        height: Dimensions.get('window').height / 2 - 20,
     },
     toast: {
         width: Dimensions.get('window').width*3/4,

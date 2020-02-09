@@ -16,7 +16,7 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
         const areaNames = areas.map(({name}) => {
             return name;
         });
-        areaNames.unshift(noFilterName);
+        areaNames.unshift("Show All");
 
         return (
             <Icon 
@@ -27,7 +27,6 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
             onPress={()=> {
                 ActionSheetIOS.showActionSheetWithOptions({
                     options: areaNames,
-                    destructiveButtonIndex: 0,
                 },
                 (clicked) => {
                     if (clicked == 0) {

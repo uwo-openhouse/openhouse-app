@@ -41,14 +41,16 @@ const EateryList = ({navigation, eateries}) => {
 
     const eateriesData = Object.entries(
         eateries.reduce((obj, eatery) => {
-            if (Object.entries(obj).length === 0 && obj.constructor === Object) {
-                obj['Open'] = [];
-                obj['Closed'] = [];
-            }
             if (isOpen(eatery)) {
+                if (!obj['Open']) {
+                    obj['Open'] = [];
+                }
                 obj['Open'].push(eatery);
             }
             else {
+                if (!obj['Closed']) {
+                    obj['Closed'] = [];
+                }
                 obj['Closed'].push(eatery);
             }
             return obj;
