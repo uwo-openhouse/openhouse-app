@@ -1,5 +1,4 @@
 import {
-    StyleSheet,
     Text,
     TouchableHighlight,
     View,
@@ -9,8 +8,6 @@ import { Icon } from 'react-native-elements';
 import ListItemStyle from "../../constants/Styles";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
-import Toast from 'react-native-easy-toast';
-
 import StarIcon from "../StarIcon";
 
 const ScheduleItem = ({navigation, toast, isInPlanner, addToPlanner,  removeFromPlanner, event,
@@ -34,7 +31,7 @@ const ScheduleItem = ({navigation, toast, isInPlanner, addToPlanner,  removeFrom
                         <Text style={ListItemStyle.location}>{building.name} {room}</Text>
                     </View>
                     <View style={ListItemStyle.scheduleIcon}>
-                        <StarIcon toast={toast} isLightBackground={false} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />                      
+                        <StarIcon toast={toast} isLightBackground={false} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
                     </View>
 
                 </View>
@@ -59,6 +56,7 @@ ScheduleItem.propTypes = {
         uuid: PropTypes.string.isRequired,
     }),
     uuid:PropTypes.string.isRequired,
+    isInPlanner: PropTypes.bool.isRequired,
 };
 
 export default ScheduleItem;

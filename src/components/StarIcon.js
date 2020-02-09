@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -13,12 +13,11 @@ const StarIcon = ({toast, isLightBackground, isInPlanner, add, remove, event}) =
     const cancelIcon = {name: "event-cancel", check: true};
 
     const star = isInPlanner ? cancelIcon : addIcon;
-    const [icon, setIcon] = useState(star);
 
     return (
         <View>
             <CustomIcon
-                name={icon.name}
+                name={star.name}
                 size={30}
                 color={isLightBackground ? "#FFFFFF" : Colors.offBlack}
                 underlayColor={Colors.westernPurple}
@@ -27,12 +26,10 @@ const StarIcon = ({toast, isLightBackground, isInPlanner, add, remove, event}) =
                     if (star.check) {
                         remove(event);
                         toast.current.show(<Text style={styles.toastText} >Event has been removed from your planner.</Text>);
-                        setIcon(addIcon);
                     }
                     else {
                         add(event);
                         toast.current.show(<Text style={styles.toastText} >Event has been added to your planner.</Text>);
-                        setIcon(cancelIcon);
                     }
                 }}
             />
