@@ -9,8 +9,12 @@ import { Icon } from 'react-native-elements';
 import ListItemStyle from "../../constants/Styles";
 import * as PropTypes from "prop-types";
 import {formatTime} from "../../service";
+import Toast from 'react-native-easy-toast';
 
-const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, endTime, uuid}) =>  {
+import StarIcon from "../StarIcon";
+
+const ScheduleItem = ({navigation, toast, isInPlanner, addToPlanner,  removeFromPlanner, event,
+                        name, room, areaColor, building, startTime, endTime, uuid}) =>  {
     return (
         <View style={{marginVertical: 0}}>
             <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
@@ -28,6 +32,9 @@ const ScheduleItem = ({navigation, name, room, areaColor, building, startTime, e
                             <Text style={ListItemStyle.title}>{name}</Text>
                         </View>
                         <Text style={ListItemStyle.location}>{building.name} {room}</Text>
+                    </View>
+                    <View style={ListItemStyle.scheduleIcon}>
+                        <StarIcon toast={toast} isLightBackground={false} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />                      
                     </View>
 
                 </View>

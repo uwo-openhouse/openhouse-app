@@ -1,17 +1,14 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
     StyleSheet,
     Text,
     View
 } from 'react-native';
 import * as PropTypes from "prop-types";
-import { Icon } from "react-native-elements";
 import CustomIcon from "./CustomIcon";
-import Toast, {DURATION} from 'react-native-easy-toast';
-
 import Colors from "../constants/Colors";
 
-const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
+const StarIcon = ({toast, isLightBackground, isInPlanner, add, remove, event}) => {
     const addIcon = {name: "event-add", check: false};
     const cancelIcon = {name: "event-cancel", check: true};
 
@@ -23,11 +20,9 @@ const StarIcon = ({toast, isInPlanner, add, remove, event}) => {
             <CustomIcon
                 name={icon.name}
                 size={30}
-                color="#FFFFFF"
+                color={isLightBackground ? "#FFFFFF" : Colors.offBlack}
                 underlayColor={Colors.westernPurple}
-                style={{
-                    backgroundColor: Colors.westernPurple,
-                }}
+
                 onPress={() => {
                     if (star.check) {
                         remove(event);

@@ -19,6 +19,10 @@ export default StyleSheet.create({
         fontFamily: Fonts.normalFont,
         
     },
+    scheduleIcon: {
+        marginVertical: 10,
+        marginLeft: 10,
+    },
     item: {
         display: 'flex',
         flexDirection: 'row',

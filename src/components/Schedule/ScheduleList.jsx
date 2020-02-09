@@ -24,7 +24,7 @@ const timeCompare = (time1, time2) => {
     return 0;
 };
 
-const ScheduleList = ({navigation, events}) => {
+const ScheduleList = ({navigation, events, toast, eventsInPlanner, addToPlanner, removeFromPlanner}) => {
     if (events.length === 0){
         return (<Text style={SectionListStyle.emptyListMsg}>No Events</Text>);
     }
@@ -46,7 +46,11 @@ const ScheduleList = ({navigation, events}) => {
             <SectionList
                 sections={eventData}
                 keyExtractor={(item, index) => item + index}
-                renderItem={({item}) => <ScheduleItem id={item.id} navigation={navigation} {...item} />}
+                renderItem={({item}) => <ScheduleItem id={item.id} 
+                                                        navigation={navigation} 
+                                                        toast={toast}
+                                                        event={item}
+                                                        {...item} />}
                 renderSectionHeader={({section: {title}}) => (
                     <Text style={SectionListStyle.header}>{title}</Text>
                 )}
