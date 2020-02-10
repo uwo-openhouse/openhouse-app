@@ -46,7 +46,7 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                     },
                 }}
                 rightComponent={
-                    <StarIcon toast={toast} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
+                    <StarIcon toast={toast} isLightBackground={true} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
                 }
                 statusBarProps={{ barStyle: "light-content" }}
                 containerStyle={{

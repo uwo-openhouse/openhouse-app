@@ -1,21 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, StyleSheet, Picker} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
+import Toast from 'react-native-easy-toast';
 
 //Note based off the Schedule Screen
 
 const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
     const noFilterName = 'None';
     const [filter, setFilter] = useState(noFilterName);
+
+    const toast = useRef(null);
+
     return (
         <View style={styles.container}>
             <CustomHeader navigation={navigation} title="Planner">
                 <AreaFilter areas={areas} filter={filter} setFilter={setFilter} noFilterName={noFilterName}/>
             </CustomHeader>
-            <ScheduleList navigation={navigation} events={events.filter(({area, uuid}) => (eventsInPlanner.includes(uuid) && (area === filter || filter === noFilterName)) )}/>
+            <ScheduleList navigation={navigation} toast={toast} events={events.filter(({area, uuid}) => (eventsInPlanner.includes(uuid) && (area === filter || filter === noFilterName)) )}/>
+            <Toast
+                ref={toast}
+                style={styles.toast}
+            />
         </View>
 
     );
