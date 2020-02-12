@@ -23,8 +23,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "ca.uwo.openhouse",
+      "versionCode": 0.5
     }
   }
 }
