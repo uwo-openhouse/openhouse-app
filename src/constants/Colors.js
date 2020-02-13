@@ -12,4 +12,5 @@ export default {
   noticeBackground: tintColor,
   noticeText: '#fff',
   westernPurple: '#4f2683',
+  offBlack: '#3d3d3d'
 };

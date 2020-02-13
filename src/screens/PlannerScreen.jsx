@@ -1,13 +1,14 @@
 import React, {useState, useRef} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, Picker} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
 
+//Note based off the Schedule Screen
 
-const ScheduleScreen = ({navigation, events, areas}) => {
+const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
     const noFilterName = 'None';
     const [filter, setFilter] = useState(noFilterName);
 
@@ -15,23 +16,24 @@ const ScheduleScreen = ({navigation, events, areas}) => {
 
     return (
         <View style={styles.container}>
-            <CustomHeader navigation={navigation} title="Schedule">
+            <CustomHeader navigation={navigation} title="Planner">
                 <AreaFilter areas={areas} filter={filter} setFilter={setFilter} noFilterName={noFilterName}/>
             </CustomHeader>
-            <ScheduleList navigation={navigation} toast={toast} events={events.filter(({area}) => (area === filter || filter === noFilterName) )}/>
+            <ScheduleList navigation={navigation} toast={toast} events={events.filter(({area, uuid}) => (eventsInPlanner.includes(uuid) && (area === filter || filter === noFilterName)) )}/>
             <Toast
                 ref={toast}
                 style={styles.toast}
             />
         </View>
+
     );
 };
 
-ScheduleScreen.navigationOptions = {
-    title: 'Schedule',
+PlannerScreen.navigationOptions = {
+    title: 'Planner',
     headerShown: false,
 };
-ScheduleScreen.propTypes = {
+PlannerScreen.propTypes = {
     navigation: PropTypes.object.isRequired,
     events: PropTypes.arrayOf(
         PropTypes.shape({
@@ -53,7 +55,7 @@ ScheduleScreen.propTypes = {
     )
 };
 
-export default ScheduleScreen;
+export default PlannerScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -61,7 +63,9 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: '#E5E5E5',
     },
-    toast: {
-        width: Dimensions.get('window').width*3/4,
-    },
+    dropdown: {
+        flex: 1,
+        width: 150,
+        color: 'white',
+    }
 });

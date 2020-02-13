@@ -1,7 +1,6 @@
 import React from "react";
 import * as PropTypes from "prop-types";
-import {ActivityIndicator, StyleSheet} from "react-native";
-import Colors from "../constants/Colors";
+import Loading from "./Loading";
 
 
 const Loadable = (WrappedComponent) => {
@@ -12,7 +11,7 @@ const Loadable = (WrappedComponent) => {
                 <WrappedComponent {...props} />
             );
         }
-        return (<ActivityIndicator style={styles.loading} size="large" color={Colors.westernPurple} />);
+        return (<Loading/>);
     };
 
     LoadableComponent.propTypes = {
@@ -26,13 +25,5 @@ const Loadable = (WrappedComponent) => {
     };
     return LoadableComponent;
 };
-
-const styles = StyleSheet.create({
-    loading: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-});
 
 export default Loadable;

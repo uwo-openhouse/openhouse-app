@@ -1,36 +1,53 @@
 import React from 'react';
 import {
+  StyleSheet,
   Image,
   Text,
   View,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import CustomHeader from "../components/CustomHeader";
+import { ScrollView } from 'react-native-gesture-handler';
+import { Button } from 'react-native-elements';
+import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
-  let message = 'No open house right now please check back later';
+  let messageTitle = ''
+  let messageBody = 'Currently there is no open house right now. Please check back later';
+
+
   if (hasOpenHouse){
-    message = `Welcome to the ${openHouse.name}`;
+    messageBody = `We are delighted you have decided to attend ${openHouse.name}. Today, you have the opportunity to meet with professors, staff and students to learn why Western offers the best student experience among Canadian universities.`;
+    messageTitle = `Welcome to the ${openHouse.name}`;
   }
 
   return (
-      <View>
+      <View style={{flex: 1}}>
         <CustomHeader navigation={navigation} title="Home" />
-        <Text>{message}</Text>
+        <ScrollView>
+          <View style={{height:250,}}>
+            <Image
+              style={styles.image}
+              source={require('../assets/images/MBOHbanner.png')}>
+            </Image>
+          </View>
+          <Text style={styles.title}>{messageTitle}</Text>
+          <View style={styles.content} >
+            <Text style={styles.messageBody}>{messageBody}</Text>
+            <Button buttonStyle={styles.navButton}
+                    title="Schedule"
+                    onPress={() => navigation.navigate('Schedule')} />
+            <Button buttonStyle={styles.navButton}
+                    title="Planner"
+                    onPress={() => navigation.navigate('Planner')} />
+            <Button buttonStyle={styles.navButton}
+                    title="Eateries"
+                    onPress={() => navigation.navigate('Eateries')} />
+          </View>
+        </ScrollView>
       </View>
   );
-};
-
-
-HomeScreen.navigationOptions = {
-
-  drawerLabel: 'Home',
-  drawerIcon: () => (
-      <Image
-          source={require('../assets/images/robot-dev.png')}
-          style={{width: 50, height: 50}}
-      />
-  ),
 };
 
 HomeScreen.propTypes = {
@@ -49,3 +66,44 @@ HomeScreen.defaultProps = {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'cover',
+  },
+  title: {
+    color: 'white',
+    backgroundColor: Colors.westernPurple,
+    textAlign: 'center',
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingHorizontal: 35,
+    fontFamily: Fonts.boldFont,
+    fontSize: 22  ,
+    lineHeight: 28,
+  },
+  content:{
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 16,
+  },
+  messageBody: {
+    lineHeight: 18,
+    fontFamily: Fonts.normalFont,
+    marginHorizontal: 16,
+    paddingTop: 10,
+    paddingBottom: 25,
+    marginBottom: 10,
+    borderBottomColor: '#999',
+    borderBottomWidth: 1,
+  },
+  navButton: {
+    backgroundColor: Colors.westernPurple,
+    borderRadius: 25,
+    marginTop: 10,
+    marginBottom: 5,
+  }
+});

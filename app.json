@@ -24,8 +24,16 @@
       "**/*"
     ],
     "android": {
-      "package": "ca.uwo.openhouse",
-      "versionCode": 0.5
+      "package": "com.uwo.openhouse",
+      "permissions": [
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
+      }
     }
   }
 }
