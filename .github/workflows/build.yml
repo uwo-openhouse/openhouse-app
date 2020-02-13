@@ -30,12 +30,12 @@ jobs:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Setup Environment Variables
         run: echo "BACKEND_URL=$BACKEND_URL" > .env.production
+        env:
+          BACKEND_URL: ${{ matrix.backend }}
       - uses: actions/upload-artifact@v1
         with:
           name: ${{ format('{0}.env', matrix.artifact_name) }}
           path: .env.production
-        env:
-          BACKEND_URL: ${{ matrix.backend }}
       - name: Build
         run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk
         env:
