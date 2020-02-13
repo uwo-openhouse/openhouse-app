@@ -29,7 +29,7 @@ jobs:
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Setup Environment Variables
-        run: echo "BACKEND_URL=$BACKEND_URL\nDEFAULT_TIME_ZONE=$DEFAULT_TIME_ZONE" > .env
+        run: echo -e "BACKEND_URL=$BACKEND_URL\nDEFAULT_TIME_ZONE=$DEFAULT_TIME_ZONE" > .env
         env:
           BACKEND_URL: ${{ matrix.backend }}
           DEFAULT_TIME_ZONE: America/New_York
