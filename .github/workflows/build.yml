@@ -29,7 +29,7 @@ jobs:
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o ~/$ARTIFACT_NAME.apk
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk
         env:
           BACKEND_URL: ${{ matrix.backend }}
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
