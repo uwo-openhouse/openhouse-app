@@ -19,7 +19,7 @@ jobs:
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o ~/app.apk
         env:
           BACKEND_URL: https://f5dfwrf3a8.execute-api.us-east-2.amazonaws.com/Prod
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
