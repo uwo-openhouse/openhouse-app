@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+          path: ${{ format('{{{0}.apk}}', matrix.artifact_name)}}
       - name: Install Dependencies
         run: yarn install
       - name: Build Keystore
