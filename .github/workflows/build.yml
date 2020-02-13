@@ -5,6 +5,16 @@ on: [push, pull_request]
 jobs:
   build_android:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        enviroment: [prod, test]
+        include:
+          - enviroment: prod
+            backend: https://vlpl6d8t30.execute-api.us-east-1.amazonaws.com/Prod
+            artifact_name: prod-env-build
+          - enviroment: test
+            backend: https://ld89hb8od1.execute-api.us-east-1.amazonaws.com/Prod
+            artifact_name: test-env-build
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -19,11 +29,16 @@ jobs:
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o ~/app.apk
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o ~/$ARTIFACT_NAME.apk
         env:
-          BACKEND_URL: https://f5dfwrf3a8.execute-api.us-east-2.amazonaws.com/Prod
+          BACKEND_URL: ${{ matrix.backend }}
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
           EXPO_ANDROID_KEYSTORE_ALIAS: ${{ secrets.EXPO_ANDROID_KEYSTORE_ALIAS }}
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.EXPO_ANDROID_KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.EXPO_ANDROID_KEY_PASSWORD }}
+          ARTIFACT_NAME: ${{ matrix.artifact_name }}
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ join(matrix.artifact_name, '.apk') }}
