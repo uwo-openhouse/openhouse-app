@@ -37,8 +37,16 @@ jobs:
         with:
           name: ${{ format('{0}.env', matrix.artifact_name) }}
           path: .env
+      - name: Publish App
+        run: |
+          expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+          expo publish --config app.json --release-channel $RELEASE_CHANNEL
+        env:
+          EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
+          EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
+          RELEASE_CHANNEL: ${{ format('{0}_{1}', matrix.enviroment, github.run_id) }}
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk --config app.json
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk --config app.json --release-channel $RELEASE_CHANNEL
         env:
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
@@ -46,6 +54,7 @@ jobs:
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.EXPO_ANDROID_KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.EXPO_ANDROID_KEY_PASSWORD }}
           ARTIFACT_NAME: ${{ matrix.artifact_name }}
+          RELEASE_CHANNEL: ${{ format('{0}_{1}', matrix.enviroment, github.run_id) }}
       - uses: actions/upload-artifact@v1
         with:
           name: ${{ matrix.artifact_name }}
