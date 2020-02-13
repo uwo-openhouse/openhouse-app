@@ -12,13 +12,18 @@ jobs:
           node-version: '10.x'
       - name: Install Dependencies
         run: yarn install
+      - name: Build Keystore
+        run: |
+          echo $EXPO_ANDROID_KEYSTORE_BASE64 > app.jks.base64
+          base64 --decode app.jks.base64 > app.jks
+        env:
+          EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Build
-        run: yarn run build:android
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS
         env:
           BACKEND_URL: https://f5dfwrf3a8.execute-api.us-east-2.amazonaws.com/Prod
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
-          EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
           EXPO_ANDROID_KEYSTORE_ALIAS: ${{ secrets.EXPO_ANDROID_KEYSTORE_ALIAS }}
           EXPO_ANDROID_KEYSTORE_PASSWORD: ${{ secrets.EXPO_ANDROID_KEYSTORE_PASSWORD }}
           EXPO_ANDROID_KEY_PASSWORD: ${{ secrets.EXPO_ANDROID_KEY_PASSWORD }}
