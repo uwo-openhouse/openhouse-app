@@ -28,8 +28,12 @@ jobs:
           base64 --decode app.jks.base64 > app.jks
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
-      - name: Setup Envrioment Variables
+      - name: Setup Environment Variables
         run: echo "BACKEND_URL=$BACKEND_URL" > .env.production
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ${{ format('{0}.env', matrix.artifact_name) }}
+          path: .env.production
         env:
           BACKEND_URL: ${{ matrix.backend }}
       - name: Build
