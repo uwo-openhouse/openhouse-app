@@ -11,7 +11,9 @@ jobs:
         with:
           node-version: '10.x'
       - name: Install Dependencies
-        run: yarn install
+        run: |
+          yarn install
+          yarn global add turtle-cli
       - name: Build
         run: turtle build:android
         env:
