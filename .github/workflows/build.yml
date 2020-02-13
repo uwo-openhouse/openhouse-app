@@ -17,6 +17,8 @@ jobs:
             artifact_name: test-env-build
     steps:
       - uses: actions/checkout@v1
+      - name: Setup kernel for react native, increase watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
@@ -29,25 +31,23 @@ jobs:
         env:
           EXPO_ANDROID_KEYSTORE_BASE64: ${{ secrets.EXPO_ANDROID_KEYSTORE_BASE64 }}
       - name: Setup Environment Variables
-        run: echo -e "BACKEND_URL=$BACKEND_URL\nDEFAULT_TIME_ZONE=$DEFAULT_TIME_ZONE" > .env
+        run: echo -e "BACKEND_URL=$BACKEND_URL" > .env.production
         env:
           BACKEND_URL: ${{ matrix.backend }}
-          DEFAULT_TIME_ZONE: America/New_York
-      - uses: actions/upload-artifact@v1
-        with:
-          name: ${{ format('{0}.env', matrix.artifact_name) }}
-          path: .env
+      - name: Setup Google Maps api key
+        run: sed "s/GOOGLE_MAPS_API_KEY_CHANGE_ME/$GOOGLE_MAPS_API_KEY/g" app.json > prod.app.json
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       - name: Publish App
         run: |
-          sudo sysctl fs.inotify.max_user_watches=524288
           yarn run expo:login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
-          yarn run expo:publish --config app.json --release-channel $RELEASE_CHANNEL
+          yarn run expo:publish --config prod.app.json --release-channel $RELEASE_CHANNEL
         env:
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
           RELEASE_CHANNEL: ${{ format('{0}_{1}', matrix.enviroment, github.run_id) }}
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk --config app.json --release-channel $RELEASE_CHANNEL
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk --config prod.app.json --release-channel $RELEASE_CHANNEL
         env:
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
