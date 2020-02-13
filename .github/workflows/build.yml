@@ -11,11 +11,9 @@ jobs:
         with:
           node-version: '10.x'
       - name: Install Dependencies
-        run: |
-          yarn install
-          yarn global add turtle-cli
+        run: yarn install
       - name: Build
-        run: turtle build:android
+        run: yarn run build:android
         env:
           BACKEND_URL: https://f5dfwrf3a8.execute-api.us-east-2.amazonaws.com/Prod
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
