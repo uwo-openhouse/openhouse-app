@@ -27,7 +27,9 @@
       "package": "com.uwo.openhouse",
       "permissions": [
         "ACCESS_FINE_LOCATION"
-      ]
+      ],
+      "versionCode": 1,
+      "icon": "./src/assets/images/icon.png"
     },
     "ios": {
       "supportsTablet": true,

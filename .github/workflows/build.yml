@@ -38,7 +38,7 @@ jobs:
           name: ${{ format('{0}.env', matrix.artifact_name) }}
           path: .env
       - name: Build
-        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk
+        run: yarn run build:android --keystore-path app.jks --keystore-alias $EXPO_ANDROID_KEYSTORE_ALIAS --type apk -o $ARTIFACT_NAME.apk --config app.json
         env:
           EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
           EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
