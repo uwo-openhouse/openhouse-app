@@ -39,6 +39,7 @@ jobs:
           path: .env
       - name: Publish App
         run: |
+          sudo sysctl fs.inotify.max_user_watches=524288
           yarn run expo:login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
           yarn run expo:publish --config app.json --release-channel $RELEASE_CHANNEL
         env:
