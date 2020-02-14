@@ -6,7 +6,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "expo:login": "expo login",
+    "expo:publish": "expo publish",
+    "build:android": "turtle build:android"
   },
   "jest": {
     "preset": "jest-expo"
@@ -51,7 +54,9 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
-    "jest-expo": "~36.0.1"
+    "expo-cli": "^3.13.1",
+    "jest-expo": "~36.0.1",
+    "turtle-cli": "^0.13.8"
   },
   "private": true
 }

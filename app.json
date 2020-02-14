@@ -27,7 +27,14 @@
       "package": "com.uwo.openhouse",
       "permissions": [
         "ACCESS_FINE_LOCATION"
-      ]
+      ],
+      "versionCode": 1,
+      "icon": "./src/assets/images/icon.png",
+      "config": {
+        "googleMaps": {
+          "apiKey": "GOOGLE_MAPS_API_KEY_CHANGE_ME"
+        }
+      }
     },
     "ios": {
       "supportsTablet": true,
