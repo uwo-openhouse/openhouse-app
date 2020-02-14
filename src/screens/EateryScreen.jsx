@@ -3,6 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import * as PropTypes from "prop-types";
 import EateryList from "../components/Eatery/EateryList";
+import Colors from "../constants/Colors";
 
 const EateryScreen = ({navigation, eateries}) => {
     return (
@@ -35,6 +36,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
 });

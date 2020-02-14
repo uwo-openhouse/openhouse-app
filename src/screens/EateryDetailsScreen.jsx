@@ -1,16 +1,12 @@
 import React from 'react';
 import {
-    View,
     Text,
     StyleSheet,
-    Dimensions,
     PermissionsAndroid,
     Platform,
-    Button,
     ScrollView
 } from 'react-native';
 import * as PropTypes from "prop-types";
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Colors from "../constants/Colors";
 import { Header } from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
@@ -84,7 +80,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
     location: {
         flex: 1,

@@ -1,10 +1,11 @@
 import React, {useState, useRef} from 'react';
-import {View, StyleSheet, Picker} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
+import Colors from "../constants/Colors";
 
 //Note based off the Schedule Screen
 
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
     dropdown: {
         flex: 1,

@@ -13,7 +13,7 @@ import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
 
 const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
-  let messageTitle = ''
+  let messageTitle = '';
   let messageBody = 'Currently there is no open house right now. Please check back later';
 
 
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 25,
     marginBottom: 10,
-    borderBottomColor: '#999',
+    borderBottomColor: Colors.lineColor,
     borderBottomWidth: 1,
   },
   navButton: {
