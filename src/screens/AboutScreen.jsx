@@ -4,7 +4,9 @@ import contributors from "../constants/contributors";
 import React from "react";
 import {Linking} from 'expo';
 import {Button, Icon} from "react-native-elements";
+import Hyperlink from 'react-native-hyperlink'
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 
 const AboutScreen = ({navigation}) => (
@@ -25,6 +27,11 @@ const AboutScreen = ({navigation}) => (
                 icon={(<Icon iconStyle={styles.githubIcon} name='github' type="font-awesome" color="white"/>)}
                 onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}
             />
+            <Hyperlink linkDefault linkStyle={styles.link}>
+                <Text style={[styles.text, styles.overLinedText, styles.paddedText, styles.lowerHeader]}>
+                    If you have any questions about becoming a Western student, please email welcome@uwo.ca.
+                </Text>
+            </Hyperlink>
         </View>
     </View>
 );
@@ -33,7 +40,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
     contributorList: {
         flex: 7,
@@ -45,6 +52,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: '100%',
         fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    link: {
+        color: Colors.linkColor,
+        textDecorationLine: 'underline',
     },
     contributor: {
         textAlign: 'center',
@@ -56,30 +68,37 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginTop: 10,
         marginBottom: 10,
-        marginHorizontal: 16,
     },
     githubIcon:{
         marginRight: 5,
         paddingRight: 4,
     },
     underLinedText: {
-        borderColor: '#999',
+        borderColor: Colors.lineColor,
         borderBottomWidth: 1,
+    },
+    overLinedText: {
+        borderColor: Colors.lineColor,
+        borderTopWidth: 1,
     },
     paddedText: {
         paddingTop: 10,
         paddingBottom: 25,
-        marginBottom: 10,
-        marginHorizontal: 16,
     },
     text: {
         lineHeight: 18,
-        fontFamily: 'bentonsans-book',
+        fontFamily: Fonts.normalFont,
     },
     header: {
+        marginBottom: 10,
+        paddingTop: 15
+    },
+    lowerHeader: {
+        marginBottom: 0,
         paddingTop: 15
     },
     body: {
+        marginHorizontal: 16,
         flex: 1,
         height: 100,
     }

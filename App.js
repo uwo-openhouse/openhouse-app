@@ -16,6 +16,7 @@ import {getOpenHouse, hasOpenHouse} from "./src/reducers";
 import {getOpenHouses} from "./src/actions/openHouses";
 import ErrorPopup from "./src/containers/Errors/ErrorPopup";
 import Loading from "./src/components/Loading";
+import Colors from "./src/constants/Colors";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -90,6 +91,6 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
 });

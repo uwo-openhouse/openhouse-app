@@ -5,6 +5,7 @@ import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
+import Colors from "../constants/Colors";
 
 
 const ScheduleScreen = ({navigation, events, areas}) => {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: Colors.background,
     },
     toast: {
         width: Dimensions.get('window').width*3/4,
