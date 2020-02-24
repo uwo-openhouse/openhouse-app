@@ -84,7 +84,7 @@ jobs:
           echo $EXPO_IOS_DIST_P12_BASE64 > app_dist.p12.base64
           base64 --decode app_dist.p12.base64 > app_dist.p12
           echo $EXPO_IOS_PROVISIONING_PROFILE_BASE64 > app.mobileprovision.base64
-          base64 --decode app_dist.p12.base64 > app.mobileprovision
+          base64 --decode app.mobileprovision.base64 > app.mobileprovision
         env:
           EXPO_IOS_DIST_P12_BASE64: ${{ secrets.EXPO_IOS_DIST_P12_BASE64 }}
           EXPO_IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.EXPO_IOS_PROVISIONING_PROFILE_BASE64 }}
