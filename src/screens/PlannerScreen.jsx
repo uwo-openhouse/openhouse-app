@@ -15,6 +15,15 @@ const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
 
     const toast = useRef(null);
 
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('didFocus', () => {
+            setFilter(noFilterName);
+        });
+
+        return () => {unsubscribe.remove()};
+    }, [navigation]);
+    
+
     return (
         <View style={styles.container}>
             <CustomHeader navigation={navigation} title="Planner">
