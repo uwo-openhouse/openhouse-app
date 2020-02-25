@@ -24,7 +24,7 @@
       "**/*"
     ],
     "android": {
-      "package": "ca.uwo.openhouse",
+      "package": "com.uwo.openhouse",
       "permissions": [
         "ACCESS_FINE_LOCATION"
       ],
@@ -41,7 +41,7 @@
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
       },
-      "bundleIdentifier": "ca.uwo.openhouse",
+      "bundleIdentifier": "com.uwo.openhouse",
       "buildNumber": "1.0.0"
     }
   }
