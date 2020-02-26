@@ -9,7 +9,8 @@
     "test": "jest --watchAll",
     "expo:login": "expo login",
     "expo:publish": "expo publish",
-    "build:android": "turtle build:android"
+    "build:android": "turtle build:android",
+    "build:ios": "turtle build:ios"
   },
   "jest": {
     "preset": "jest-expo"
@@ -57,7 +58,7 @@
     "babel-preset-expo": "~8.0.0",
     "expo-cli": "^3.13.1",
     "jest-expo": "~36.0.1",
-    "turtle-cli": "^0.13.8"
+    "turtle-cli": "^0.13.9"
   },
   "private": true
 }
