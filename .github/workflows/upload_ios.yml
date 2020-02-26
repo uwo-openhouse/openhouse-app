@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        enviroment: [prod, test]
+        enviroment: [prod]
         include:
           - enviroment: prod
             backend: https://vlpl6d8t30.execute-api.us-east-1.amazonaws.com/Prod
@@ -62,7 +62,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        enviroment: [prod, test]
+        enviroment: [prod]
         include:
           - enviroment: prod
             artifact_name: prod-ios-build
