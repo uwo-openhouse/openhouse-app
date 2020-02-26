@@ -120,14 +120,14 @@ jobs:
   verify_ios:
     needs: build_ios
     runs-on: macos-latest
-      strategy:
-        matrix:
-          enviroment: [prod, test]
-          include:
-            - enviroment: prod
-              artifact_name: prod-ios-build
-            - enviroment: test
-              artifact_name: test-ios-build
+    strategy:
+      matrix:
+        enviroment: [prod, test]
+        include:
+          - enviroment: prod
+            artifact_name: prod-ios-build
+          - enviroment: test
+            artifact_name: test-ios-build
     steps:
       - uses: actions/download-artifact@v1
         with:
