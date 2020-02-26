@@ -37,7 +37,7 @@
       }
     },
     "ios": {
-      "supportsTablet": false,
+      "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
       },
