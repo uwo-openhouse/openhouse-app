@@ -139,7 +139,7 @@ jobs:
           --username $APPSTORE_CONNECT_USERNAME \
           --password $APPSTORE_CONNECT_PASSWORD --verbose
         env:
-          IPA_PATH: ${{ format('{0}.ipa', matrix.artifact_name) }}
+          IPA_PATH: ${{ format('{0}/{0}.ipa', matrix.artifact_name) }}
           APPSTORE_CONNECT_USERNAME: ${{ secrets.APPSTORE_CONNECT_USERNAME }}
           APPSTORE_CONNECT_PASSWORD: ${{ secrets.APPSTORE_CONNECT_PASSWORD }}
 
