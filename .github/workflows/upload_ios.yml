@@ -1,0 +1,85 @@
+name: Upload to App Store Connect
+
+on: [push]
+
+jobs:
+  build_ios:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        enviroment: [prod, test]
+        include:
+          - enviroment: prod
+            backend: https://vlpl6d8t30.execute-api.us-east-1.amazonaws.com/Prod
+            artifact_name: prod-ios-build
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build Certs
+        run: |
+          echo $EXPO_IOS_DIST_P12_BASE64 > app_dist.p12.base64
+          base64 --decode app_dist.p12.base64 > app_dist.p12
+          echo $EXPO_IOS_PROVISIONING_PROFILE_BASE64 > app.mobileprovision.base64
+          base64 --decode app.mobileprovision.base64 > app.mobileprovision
+        env:
+          EXPO_IOS_DIST_P12_BASE64: ${{ secrets.EXPO_IOS_DIST_P12_BASE64 }}
+          EXPO_IOS_PROVISIONING_PROFILE_BASE64: ${{ secrets.EXPO_IOS_PROVISIONING_PROFILE_BASE64 }}
+      - name: Setup Environment Variables
+        run: echo -e "BACKEND_URL=$BACKEND_URL" > .env.production
+        env:
+          BACKEND_URL: ${{ matrix.backend }}
+      - name: Setup Google Maps api key
+        run: sed "s/GOOGLE_MAPS_API_KEY_CHANGE_ME/$GOOGLE_MAPS_API_KEY/g" app.json > prod.app.json
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      - name: Publish App
+        run: |
+          yarn run expo:login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+          yarn run expo:publish --config prod.app.json --release-channel $RELEASE_CHANNEL
+        env:
+          EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
+          EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
+          RELEASE_CHANNEL: ${{ format('ios_{0}_{1}', matrix.enviroment, github.run_id) }}
+      - name: Build
+        run: yarn run build:ios --team-id $EXPO_APPLE_TEAM_ID --dist-p12-path ./app_dist.p12 --provisioning-profile-path ./app.mobileprovision  -o $ARTIFACT_NAME.ipa --config prod.app.json --release-channel $RELEASE_CHANNEL
+        env:
+          EXPO_USERNAME: ${{ secrets.EXPO_USERNAME }}
+          EXPO_PASSWORD: ${{ secrets.EXPO_PASSWORD }}
+          EXPO_IOS_DIST_P12_PASSWORD: ${{ secrets.EXPO_IOS_DIST_P12_PASSWORD }}
+          EXPO_APPLE_TEAM_ID: ${{ secrets.EXPO_APPLE_TEAM_ID }}
+          ARTIFACT_NAME: ${{ matrix.artifact_name }}
+          RELEASE_CHANNEL: ${{ format('ios_{0}_{1}', matrix.enviroment, github.run_id) }}
+      - uses: actions/upload-artifact@v1
+        with:
+          name: ${{ matrix.artifact_name }}
+          path: ${{ format('{0}.ipa', matrix.artifact_name) }}
+  upload_ios:
+    needs: build_ios
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        enviroment: [prod, test]
+        include:
+          - enviroment: prod
+            artifact_name: prod-ios-build
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: ${{ matrix.artifact_name }}
+      - name: Validate app
+        run: |
+          xcrun altool --upload-app --type ios \
+          --file $IPA_PATH \
+          --username $APPSTORE_CONNECT_USERNAME \
+          --password $APPSTORE_CONNECT_PASSWORD --verbose
+        env:
+          IPA_PATH: ${{ format('{0}/{0}.ipa', matrix.artifact_name) }}
+          APPSTORE_CONNECT_USERNAME: ${{ secrets.APPSTORE_CONNECT_USERNAME }}
+          APPSTORE_CONNECT_PASSWORD: ${{ secrets.APPSTORE_CONNECT_PASSWORD }}
+
+
+
