@@ -133,13 +133,13 @@ jobs:
         with:
           name: ${{ matrix.artifact_name }}
       - name: Validate app
-      run: |
-        xcrun altool --validate-app --type ios \
+        run: |
+          xcrun altool --validate-app --type ios \
           --file $IPA_PATH \
           --username $APPSTORE_CONNECT_USERNAME \
           --password $APPSTORE_CONNECT_PASSWORD --verbose
-      env:
-        IPA_PATH: ${{ format('{0}.ipa', matrix.artifact_name) }}
-        APPSTORE_CONNECT_USERNAME: ${{ secrets.APPSTORE_CONNECT_USERNAME }}
-        APPSTORE_CONNECT_PASSWORD: ${{ secrets.APPSTORE_CONNECT_PASSWORD }}
+        env:
+          IPA_PATH: ${{ format('{0}.ipa', matrix.artifact_name) }}
+          APPSTORE_CONNECT_USERNAME: ${{ secrets.APPSTORE_CONNECT_USERNAME }}
+          APPSTORE_CONNECT_PASSWORD: ${{ secrets.APPSTORE_CONNECT_PASSWORD }}
 
