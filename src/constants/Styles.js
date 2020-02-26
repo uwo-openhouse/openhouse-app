@@ -1,8 +1,8 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import Colors from "./Colors";
 import Fonts from "./Fonts";
-  
-export default StyleSheet.create({   
+
+export default StyleSheet.create({
     header: {
         fontSize: 16,
         opacity: 0.5,
@@ -17,7 +17,6 @@ export default StyleSheet.create({
         marginHorizontal: 15,
         marginVertical: 6,
         fontFamily: Fonts.normalFont,
-        
     },
     scheduleIcon: {
         marginVertical: 10,
@@ -41,8 +40,8 @@ export default StyleSheet.create({
 
         elevation: 2,
     },
-
     title: {
+        flex: 1,
         flexGrow: 1,
         fontSize: 18,
         fontFamily: Fonts.normalFont,
@@ -57,7 +56,6 @@ export default StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'stretch',
         flex: 1,
-        
     },
     time: {
         fontSize: 14,
@@ -67,7 +65,6 @@ export default StyleSheet.create({
     timeContainer: {
         marginRight: 16,
         width: Dimensions.get('window').width*0.15,
-        
     },
 
     location: {
