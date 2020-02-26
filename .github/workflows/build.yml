@@ -117,3 +117,29 @@ jobs:
         with:
           name: ${{ matrix.artifact_name }}
           path: ${{ format('{0}.ipa', matrix.artifact_name) }}
+  verify_ios:
+    needs: build_ios
+    runs-on: macos-latest
+      strategy:
+        matrix:
+          enviroment: [prod, test]
+          include:
+            - enviroment: prod
+              artifact_name: prod-ios-build
+            - enviroment: test
+              artifact_name: test-ios-build
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: ${{ matrix.artifact_name }}
+      - name: Validate app
+      run: |
+        xcrun altool --validate-app --type ios \
+          --file $IPA_PATH \
+          --username $APPSTORE_CONNECT_USERNAME \
+          --password $APPSTORE_CONNECT_PASSWORD --verbose
+      env:
+        IPA_PATH: ${{ format('{0}.ipa', matrix.artifact_name) }}
+        APPSTORE_CONNECT_USERNAME: ${{ secrets.APPSTORE_CONNECT_USERNAME }}
+        APPSTORE_CONNECT_PASSWORD: ${{ secrets.APPSTORE_CONNECT_PASSWORD }}
+
