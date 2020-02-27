@@ -37,7 +37,7 @@ jobs:
       - name: Setup Google Maps api key
         run: sed "s/GOOGLE_MAPS_API_KEY_CHANGE_ME/$GOOGLE_MAPS_API_KEY/g" app.json > prod.app.json
         env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.ANDROID_GOOGLE_MAPS_API_KEY }}
       - name: Publish App
         run: |
           yarn run expo:login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
@@ -95,7 +95,7 @@ jobs:
       - name: Setup Google Maps api key
         run: sed "s/GOOGLE_MAPS_API_KEY_CHANGE_ME/$GOOGLE_MAPS_API_KEY/g" app.json > prod.app.json
         env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          GOOGLE_MAPS_API_KEY: ${{ secrets.IOS_GOOGLE_MAPS_API_KEY }}
       - name: Publish App
         run: |
           yarn run expo:login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
