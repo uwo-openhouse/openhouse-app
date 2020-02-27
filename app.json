@@ -42,7 +42,7 @@
         "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
       },
       "bundleIdentifier": "com.uwo.openhouse",
-      "buildNumber": "1.0.2"
+      "buildNumber": "1.0.3"
     }
   }
 }

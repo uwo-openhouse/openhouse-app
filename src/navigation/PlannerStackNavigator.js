@@ -16,7 +16,7 @@ const PlannerStack = createStackNavigator({
     },{
         initialRoutName: 'Planner',
         defaultNavigationOptions: {
-            header:null,
+            headerShown:false,
         },
     }
 );

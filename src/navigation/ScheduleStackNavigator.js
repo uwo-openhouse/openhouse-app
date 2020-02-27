@@ -16,7 +16,7 @@ const ScheduleStack = createStackNavigator({
     },{
         initialRoutName: 'Schedule',
         defaultNavigationOptions: {
-            header:null,
+            headerShown:false,
         },
     }
 );

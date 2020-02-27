@@ -16,7 +16,7 @@ const EateryStack = createStackNavigator({
     },{
         initialRoutName: 'Eateries',
         defaultNavigationOptions: {
-            header:null,
+            headerShown:false,
         },
     }
 );
