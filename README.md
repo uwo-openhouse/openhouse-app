@@ -27,3 +27,7 @@ Run with:
 
 # React Native Examples:
 - https://github.com/EvanBacon/firebase-instagramgit s
+
+
+# Contributions
+All contributors please be sure to add yourselves to the list at [contributors.js](./src/constants/contributors.js)

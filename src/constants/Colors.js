@@ -12,4 +12,8 @@ export default {
   noticeBackground: tintColor,
   noticeText: '#fff',
   westernPurple: '#4f2683',
+  offBlack: '#3d3d3d',
+  linkColor: '#2980b9',
+  background: '#E5E5E5',
+  lineColor: '#999',
 };

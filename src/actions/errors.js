@@ -1,9 +1,8 @@
 import actionTypes from './actionTypes';
 
 // eslint-disable-next-line import/prefer-default-export
-export const hideError = index => (dispatch) => {
+export const hideErrors = () => (dispatch) => {
     dispatch({
-        type: actionTypes.HIDE_ERROR,
-        payload: index,
+        type: actionTypes.HIDE_ERRORS,
     });
 };
