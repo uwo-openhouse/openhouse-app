@@ -5,18 +5,20 @@ import {
     Dimensions,
     PermissionsAndroid,
     Platform,
-    ScrollView
+    ScrollView,
+    View,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import Colors from "../constants/Colors";
-import { Header } from "react-native-elements";
-import { HeaderBackButton } from "react-navigation-stack";
+import {Header, Icon} from "react-native-elements";
+import {HeaderBackButton} from "react-navigation-stack";
 import StarIcon from "../components/StarIcon";
 import BuildingMaps from "../components/BuildingMaps";
 import Toast from 'react-native-easy-toast';
 import {formatTime} from "../service";
+import ListItemStyle from "../constants/Styles";
 
-const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner}) => {
+const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlanner, removeFromPlanner, area}) => {
     const loc = {
         latitude: building.position.lat,
         longitude: building.position.lng,
@@ -35,26 +37,37 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
             contentContainerStyle={{flexGrow: 1}}
         >
             <Header
-                leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
+                leftComponent={<HeaderBackButton onPress={() => navigation.goBack()} tintColor="#fff"/>}
                 centerComponent={{
                     text: event.name,
                     style: {
-                      color: "#fff",
-                      fontSize: 20,
-                      fontFamily:'bentonsans-bold',
+                        color: "#fff",
+                        fontSize: 20,
+                        fontFamily: 'bentonsans-bold',
                     },
                 }}
                 rightComponent={
-                    <StarIcon toast={toast} isLightBackground={true} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
+                    <StarIcon toast={toast} isLightBackground={true} isInPlanner={isInPlanner} add={addToPlanner}
+                              remove={(e) => removeFromPlanner(e.uuid)} event={event}/>
                 }
-                statusBarProps={{ barStyle: "light-content" }}
+                statusBarProps={{barStyle: "light-content"}}
                 containerStyle={{
                     backgroundColor: Colors.westernPurple,
                 }}
             />
-            <Text style={styles.details}>Location: {building.name}</Text>
-            <Text style={styles.details}>Time: {formatTime(event.startTime)} - {formatTime(event.endTime)}</Text>
-            <Text style={styles.description}>Description: {event.description}</Text>
+            <View style={styles.detailsContainer}>
+                <View style={[ListItemStyle.categoryDot, {backgroundColor: area.color}]}/>
+                <Text style={styles.details}>{area.name}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+                <Icon iconStyle={styles.icon} name="clock-o" type='font-awesome' color={Colors.westernPurple}/>
+                <Text style={styles.details}>{formatTime(event.startTime)} - {formatTime(event.endTime)}</Text>
+            </View>
+            <View style={styles.detailsContainer}>
+                <Icon iconStyle={styles.icon} name="map-marker" type='font-awesome' color={Colors.westernPurple}/>
+                <Text style={styles.details}>{building.name} {event.room}</Text>
+            </View>
+            <Text style={styles.description}>{event.description}</Text>
             <BuildingMaps loc={loc}/>
             <Toast
                 ref={toast}
@@ -92,6 +105,11 @@ EventDetailsScreen.propTypes = {
         endTime: PropTypes.string.isRequired,
         uuid: PropTypes.string.isRequired,
     }),
+    area: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        uuid: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+    }).isRequired,
     isInPlanner: PropTypes.bool.isRequired,
     addToPlanner: PropTypes.func.isRequired,
     removeFromPlanner: PropTypes.func.isRequired,
@@ -105,10 +123,18 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: Colors.background,
     },
-    details: {
+    detailsContainer: {
         flex: 1,
         marginTop: 20,
         marginHorizontal: 20,
+        flexDirection: 'row',
+    },
+    icon: {
+        flex: 1,
+        marginRight: 8,
+    },
+    details: {
+        flex: 1,
         fontSize: 20,
         color: Colors.westernPurple,
     },
@@ -121,6 +147,6 @@ const styles = StyleSheet.create({
         color: Colors.westernPurple,
     },
     toast: {
-        width: Dimensions.get('window').width*3/4,
+        width: Dimensions.get('window').width * 3 / 4,
     },
 });
