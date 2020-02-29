@@ -1,5 +1,12 @@
 import {
-    isEventsLoaded, isLocationsLoaded, isOpenHousesLoaded, getEvent, getLocation, eventIsInPlanner,
+    isEventsLoaded,
+    isLocationsLoaded,
+    isOpenHousesLoaded,
+    getEvent,
+    getLocation,
+    eventIsInPlanner,
+    getArea,
+    isAreasLoaded,
 } from "../../reducers";
 import EventDetailsScreen from "../../screens/EventDetailsScreen";
 import {connect} from "react-redux";
@@ -12,8 +19,9 @@ const mapStateToProps = (state, { navigation }) => {
     return ({
         building: getLocation(state, event.building),
         event,
+        area: getArea(state, event.area),
         isInPlanner: eventIsInPlanner(state, event.uuid),
-        isLoaded: isEventsLoaded(state) && isLocationsLoaded(state) && isOpenHousesLoaded(state),
+        isLoaded: isEventsLoaded(state) && isLocationsLoaded(state) && isOpenHousesLoaded(state) && isAreasLoaded(state),
     });
 };
 

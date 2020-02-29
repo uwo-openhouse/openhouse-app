@@ -28,7 +28,7 @@
       "permissions": [
         "ACCESS_FINE_LOCATION"
       ],
-      "versionCode": 1,
+      "versionCode": 3,
       "icon": "./src/assets/images/icon.png",
       "config": {
         "googleMaps": {
@@ -42,7 +42,10 @@
         "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
       },
       "bundleIdentifier": "com.uwo.openhouse",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.6",
+      "config": {
+        "googleMapsApiKey": "GOOGLE_MAPS_API_KEY_CHANGE_ME"
+      }
     }
   }
 }
