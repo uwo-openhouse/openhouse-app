@@ -2,8 +2,6 @@ name: Create Release
 
 on:
   push:
-    branches:
-      - master
     tags:
       - 'v*'
 
@@ -129,7 +127,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: ${{ matrix.artifact_name }}
-      - name: Validate app
+      - name: Upload app
         run: |
           xcrun altool --upload-app --type ios \
           --file $IPA_PATH \
