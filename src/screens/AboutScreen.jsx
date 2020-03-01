@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from "react-native";
+import {Dimensions, StyleSheet, Text, View} from "react-native";
 import CustomHeader from "../components/CustomHeader";
 import contributors from "../constants/contributors";
 import React from "react";
@@ -7,33 +7,39 @@ import {Button, Icon} from "react-native-elements";
 import Hyperlink from 'react-native-hyperlink'
 import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
+import {ScrollView} from "react-native-gesture-handler";
 
 
 const AboutScreen = ({navigation}) => (
+
     <View style={styles.container}>
         <CustomHeader navigation={navigation} title="About"/>
-        <View style={styles.body}>
-            <Text style={[styles.text, styles.underLinedText, styles.paddedText, styles.header]}>This app was developed
-                by 4th-year students as their capstone project for Computer Science 4470Y.</Text>
-            <View style={[styles.contributorList, styles.underLinedText]}>
-                <Text style={[styles.contributorListHeader, styles.text, styles.paddedText]}>Contributors</Text>
-                {contributors.map((contributor, index) => (
-                    <Text key={index} style={[styles.contributor, styles.text]}>{contributor}</Text>
-                ))}
+        <ScrollView>
+            <View style={styles.body}>
+                <Text style={[styles.text, styles.underLinedText, styles.paddedText, styles.header]}>This app was
+                    developed
+                    by 4th-year students as their capstone project for Computer Science 4470Y.</Text>
+                <View style={[styles.contributorList, styles.underLinedText]}>
+                    <Text style={[styles.contributorListHeader, styles.text, styles.paddedText]}>Contributors</Text>
+                    {contributors.map((contributor, index) => (
+                        <Text key={index} style={[styles.contributor, styles.text]}>{contributor}</Text>
+                    ))}
+                </View>
+                <Button
+                    buttonStyle={styles.githubButton}
+                    title="Check us out on Github"
+                    icon={(<Icon iconStyle={styles.githubIcon} name='github' type="font-awesome" color="white"/>)}
+                    onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}
+                />
+                <Hyperlink linkDefault linkStyle={styles.link}>
+                    <Text style={[styles.text, styles.overLinedText, styles.paddedText, styles.lowerHeader]}>
+                        If you have any questions about becoming a Western student, please email welcome@uwo.ca.
+                    </Text>
+                </Hyperlink>
             </View>
-            <Button
-                buttonStyle={styles.githubButton}
-                title="Check us out on Github"
-                icon={(<Icon iconStyle={styles.githubIcon} name='github' type="font-awesome" color="white"/>)}
-                onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}
-            />
-            <Hyperlink linkDefault linkStyle={styles.link}>
-                <Text style={[styles.text, styles.overLinedText, styles.paddedText, styles.lowerHeader]}>
-                    If you have any questions about becoming a Western student, please email welcome@uwo.ca.
-                </Text>
-            </Hyperlink>
-        </View>
+        </ScrollView>
     </View>
+
 );
 
 const styles = StyleSheet.create({
@@ -69,7 +75,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
     },
-    githubIcon:{
+    githubIcon: {
         marginRight: 5,
         paddingRight: 4,
     },
@@ -99,8 +105,7 @@ const styles = StyleSheet.create({
     },
     body: {
         marginHorizontal: 16,
-        flex: 1,
-        height: 100,
+        height: Math.max(Dimensions.get("screen").height - 125, 500),
     }
 });
 

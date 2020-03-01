@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import Colors from "./Colors";
 import Fonts from "./Fonts";
 
@@ -44,6 +44,7 @@ export default StyleSheet.create({
         flex: 1,
         flexGrow: 1,
         fontSize: 18,
+        lineHeight: 20,
         fontFamily: Fonts.normalFont,
         color: Colors.westernPurple,
     },
@@ -64,11 +65,11 @@ export default StyleSheet.create({
     },
     timeContainer: {
         marginRight: 16,
-        width: Dimensions.get('window').width*0.15,
     },
 
     location: {
         fontSize: 16,
+        lineHeight: 18,
         fontFamily: Fonts.normalFont,
         color: '#666666',
         marginTop: 6,

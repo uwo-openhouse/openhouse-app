@@ -4,11 +4,12 @@ import {
     StyleSheet,
     PermissionsAndroid,
     Platform,
-    ScrollView
+    ScrollView,
+    View,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import Colors from "../constants/Colors";
-import { Header } from "react-native-elements";
+import {Header, Icon} from "react-native-elements";
 import { HeaderBackButton } from "react-navigation-stack";
 import BuildingMaps from "../components/BuildingMaps";
 
@@ -43,7 +44,11 @@ const EateryDetailsScreen = ({navigation, building, eatery}) => {
                     backgroundColor: Colors.westernPurple,
                 }}
             />
-            <Text style={styles.location}>Location: {building.name}</Text>
+            <View style={styles.locationContainer}>
+                <Icon iconStyle={styles.icon} name="map-marker" type='font-awesome' color={Colors.westernPurple}/>
+                <Text style={styles.location}>{building.name}</Text>
+            </View>
+
             <BuildingMaps loc={loc}/>
         </ScrollView>
     );
@@ -82,11 +87,18 @@ const styles = StyleSheet.create({
         paddingTop: 0,
         backgroundColor: Colors.background,
     },
-    location: {
+    locationContainer: {
         flex: 1,
         marginTop: 20,
         marginHorizontal: 20,
-        marginBottom: 20,
+        flexDirection: 'row',
+    },
+    icon: {
+        flex: 1,
+        marginRight: 8,
+    },
+    location: {
+        flex: 1,
         fontSize: 20,
         color: Colors.westernPurple,
     },

@@ -18,7 +18,7 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
 
 
   if (hasOpenHouse){
-    messageBody = `We are delighted you have decided to attend ${openHouse.name}. Today, you have the opportunity to meet with professors, staff and students to learn why Western offers the best student experience among Canadian universities.`;
+    messageBody = openHouse.info.replace(new RegExp('\n','g'), "\n\n");
     messageTitle = `Welcome to the ${openHouse.name}`;
   }
 
