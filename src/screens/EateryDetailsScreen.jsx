@@ -28,6 +28,7 @@ const EateryDetailsScreen = ({navigation, building, eatery}) => {
         <ScrollView
             style={styles.container}
             stickyHeaderIndices={[0]}
+            contentContainerStyle={{flexGrow: 1}}
         >
             <Header
                 leftComponent={<HeaderBackButton onPress={() => navigation.goBack()}  tintColor="#fff"/>}
@@ -48,8 +49,10 @@ const EateryDetailsScreen = ({navigation, building, eatery}) => {
                 <Icon iconStyle={styles.icon} name="map-marker" type='font-awesome' color={Colors.westernPurple}/>
                 <Text style={styles.location}>{building.name}</Text>
             </View>
+            <View style={styles.mapContainer}>
+                <BuildingMaps loc={loc}/>
+            </View>
 
-            <BuildingMaps loc={loc}/>
         </ScrollView>
     );
 };
@@ -102,4 +105,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: Colors.westernPurple,
     },
+    mapContainer: {
+        flexGrow: 6,
+        justifyContent: "flex-end"
+    }
 });
