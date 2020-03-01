@@ -68,7 +68,9 @@ const EventDetailsScreen = ({navigation, building, event, isInPlanner, addToPlan
                 <Text style={styles.details}>{building.name} {event.room}</Text>
             </View>
             <Text style={styles.description}>{event.description}</Text>
-            <BuildingMaps loc={loc}/>
+            <View style={styles.mapContainer}>
+                <BuildingMaps loc={loc}/>
+            </View>
             <Toast
                 ref={toast}
                 position='bottom'
@@ -149,4 +151,8 @@ const styles = StyleSheet.create({
     toast: {
         width: Dimensions.get('window').width * 3 / 4,
     },
+    mapContainer: {
+        flexGrow: 10,
+        justifyContent: "flex-end"
+    }
 });

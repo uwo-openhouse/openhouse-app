@@ -30,15 +30,27 @@ const BuildingMaps = ({loc}) => {
                 />
          </MapView>
     );
-}
+};
 
-export default BuildingMaps;
+BuildingMaps.propTypes = {
+    latitude: PropTypes.number,
+    longitude: PropTypes.number,
+};
+
+BuildingMaps.defaultProps = {
+    latitude: undefined,
+    longitude: undefined,
+};
+
 
 const styles = StyleSheet.create({
     mapStyle: {
         marginBottom: 20,
         marginHorizontal: 20,
         width: Dimensions.get('window').width - 40,
-        height: Dimensions.get('window').height / 2 - 20,
+        minHeight: Dimensions.get('window').height / 2 - 20,
+        flex:1,
     },
 });
+
+export default BuildingMaps;
