@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Western U Open House",
+    "name": "WesternU Open House",
     "slug": "openhouse_app",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -28,7 +28,7 @@
       "permissions": [
         "ACCESS_FINE_LOCATION"
       ],
-      "versionCode": 4,
+      "versionCode": 5,
       "icon": "./src/assets/images/icon.png",
       "config": {
         "googleMaps": {
@@ -42,7 +42,7 @@
         "NSLocationWhenInUseUsageDescription": "The app uses the location to place a marker representing the user on maps."
       },
       "bundleIdentifier": "com.uwo.openhouse",
-      "buildNumber": "1.0.7",
+      "buildNumber": "1.0.8",
       "config": {
         "googleMapsApiKey": "GOOGLE_MAPS_API_KEY_CHANGE_ME"
       }
