@@ -1,24 +1,35 @@
 import {Overlay} from "react-native-elements";
 import React from "react";
 import * as PropTypes from "prop-types";
-import {Button, FlatList, Text, View, StyleSheet} from "react-native";
+import {FlatList, Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import ErrorElement from "./ErrorElement";
 import Colors from "../../constants/Colors";
 import color from 'color';
+import Fonts from "../../constants/Fonts";
 
 
-const ErrorPopup = ({hasErrors, errors, onDismiss}) => (
-    <Overlay isVisible={hasErrors} windowBackgroundColor={color(Colors.errorBackground).fade(0.5).rgb().toString()}>
-        <View style={styles.container}>
-            <Text style={styles.title}>An error has occurred</Text>
-            <FlatList data={errors} keyExtractor={(item, index) => String(index)}
-                      renderItem={({item}) => (<ErrorElement error={item}/>)}/>
-            <View>
-                <Button color={Colors.errorBackground} onPress={onDismiss} title="Dismiss All"/>
+const ErrorPopup = ({hasErrors, errors, onDismiss}) => {
+    const errorMessages = [];
+    const filteredErrors = errors.filter((error => {
+        const isDuplicate = errorMessages.includes(error.message);
+        errorMessages.push(error.message);
+        return !isDuplicate;
+    }));
+    return (
+        <Overlay isVisible={hasErrors} windowBackgroundColor={color(Colors.errorBackground).fade(0.5).rgb().toString()}>
+            <View style={styles.container}>
+                <Text style={styles.title}>An error has occurred</Text>
+                <FlatList data={filteredErrors} keyExtractor={(item, index) => String(index)}
+                          renderItem={({item}) => (<ErrorElement error={item}/>)}/>
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={onDismiss}>
+                        <Text style={styles.buttonText}>Dismiss</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
-    </Overlay>
-);
+        </Overlay>
+    );
+};
 
 ErrorPopup.propTypes = {
     hasErrors: PropTypes.bool.isRequired,
@@ -37,7 +48,21 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
+        fontFamily: Fonts.semiBoldFont,
+        textAlign: 'center'
     },
+    button: {
+        justifyContent: 'center',
+        paddingVertical: 10,
+        backgroundColor: Colors.errorBackground,
+    },
+    buttonText: {
+        color: 'white',
+        fontFamily: Fonts.normalFont,
+        textTransform: 'uppercase',
+        textAlign: 'center'
+    }
+
 });
 
 

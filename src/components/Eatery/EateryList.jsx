@@ -3,12 +3,13 @@ import {
     StyleSheet,
     Text,
     SafeAreaView,
-    SectionList
+    SectionList, RefreshControl
 } from 'react-native';
 import * as PropTypes from 'prop-types';
 import moment from "moment";
 import EateryItem from "../../containers/Eatery/EateryItem";
 import SectionListStyle from "../../constants/Styles";
+import Colors from "../../constants/Colors";
 
 const isOpen = (eatery) => {
     const parsedOpenTime = moment(eatery.openTime, 'H:m');
@@ -22,7 +23,7 @@ const sortEateries = (a, b) => {
     const openA = isOpen(a);
     const openB = isOpen(b);
 
-    if (openA == openB) {
+    if (openA === openB) {
         return a.name.localeCompare(b.name);
     }
     else if (openA) {
@@ -32,9 +33,9 @@ const sortEateries = (a, b) => {
         return 1;
     }
     return 0;
-}
+};
 
-const EateryList = ({navigation, eateries}) => {
+const EateryList = ({navigation, eateries, refreshing, onRefresh}) => {
     if (eateries.length === 0){
         return (<Text style={SectionListStyle.emptyListMsg}>No Eateries</Text>);
     }
@@ -69,6 +70,12 @@ const EateryList = ({navigation, eateries}) => {
                 renderSectionHeader={({section: {title}}) => (
                     <Text style={[SectionListStyle.header, title === 'Open' ? styles.open : styles.closed]}>{title}</Text>
                 )}
+                refreshControl={
+                    <RefreshControl
+                        tintColor={Colors.westernPurple}
+                        colors={[Colors.westernPurple]}
+                        refreshing={refreshing} onRefresh={onRefresh}
+                    />}
             />
         </SafeAreaView>
     );
@@ -85,6 +92,8 @@ EateryList.propTypes = {
             uuid: PropTypes.string.isRequired,
         }),
     ),
+    refreshing: PropTypes.bool.isRequired,
+    onRefresh: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

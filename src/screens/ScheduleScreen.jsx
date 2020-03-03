@@ -1,11 +1,11 @@
 import React, {useState, useRef} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
-import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
 import Colors from "../constants/Colors";
+import ScheduleList from "../containers/Schedule/ScheduleList";
 
 
 const ScheduleScreen = ({navigation, events, areas}) => {

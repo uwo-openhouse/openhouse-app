@@ -27,6 +27,11 @@ export default (state = DEFAULT_STATE, action) => {
                 ...state,
                 loading: false,
             };
+        case actionTypes.PURGE_EVENTS:
+            return {
+                ...state,
+                data: {},
+            };
         default:
             return state;
     }
