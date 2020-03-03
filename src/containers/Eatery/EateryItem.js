@@ -1,4 +1,4 @@
-import {getArea, getLocation} from "../../reducers";
+import {getLocation} from "../../reducers";
 import EateryItem from "../../components/Eatery/EateryItem";
 import {connect} from "react-redux";
 

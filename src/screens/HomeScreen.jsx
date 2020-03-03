@@ -3,7 +3,7 @@ import {
     StyleSheet,
     Image,
     Text,
-    View, Dimensions,
+    View, Dimensions, RefreshControl,
 } from 'react-native';
 import * as PropTypes from "prop-types";
 import CustomHeader from "../components/CustomHeader";
@@ -12,9 +12,9 @@ import {Button} from 'react-native-elements';
 import Colors from "../constants/Colors";
 import Fonts from "../constants/Fonts";
 
-const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
+const HomeScreen = ({navigation, hasOpenHouse, openHouse, refreshing, onRefresh}) => {
     let messageTitle = '';
-    let messageBody = 'Currently there is no open house right now. Please check back later';
+    let messageBody = 'There is no open house right now. Please check back later';
 
 
     if (hasOpenHouse) {
@@ -25,7 +25,13 @@ const HomeScreen = ({navigation, hasOpenHouse, openHouse}) => {
     return (
         <View style={{flex: 1}}>
             <CustomHeader navigation={navigation} title="Home"/>
-            <ScrollView>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        tintColor={Colors.westernPurple}
+                        colors={[Colors.westernPurple]}
+                        refreshing={refreshing} onRefresh={onRefresh}/>
+                }>
                 <View style={styles.body}>
                     <Image
                         style={styles.image}
@@ -59,6 +65,8 @@ HomeScreen.propTypes = {
         visible: PropTypes.bool.isRequired,
         date: PropTypes.number.isRequired,
     }),
+    refreshing: PropTypes.bool.isRequired,
+    onRefresh: PropTypes.func.isRequired,
 };
 
 HomeScreen.defaultProps = {

@@ -22,11 +22,11 @@ export default (state = DEFAULT_STATE, action) => {
         case actionTypes.FETCH_AREAS_FAILURE:
         case actionTypes.FETCH_BUILDINGS_FAILURE:
         case actionTypes.FETCH_OPEN_HOUSES_FAILURE:
-            return addError("Unable to connect");
+            return addError("Unable to connect. Make sure you are connected to the internet.");
         case actionTypes.REMOVE_EVENT_FROM_PLANNER_FAILURE:
-            return addError("Unable to remove from planner");
+            return addError("Unable to remove from planner.");
         case actionTypes.ADD_EVENT_TO_PLANNER_FAILURE:
-            return addError("Unable to add to planner");
+            return addError("Unable to add to planner.");
         case actionTypes.HIDE_ERRORS:
             return {
                 ...state,

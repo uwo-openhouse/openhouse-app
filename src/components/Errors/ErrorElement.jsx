@@ -3,12 +3,12 @@ import {StyleSheet, Text, View} from "react-native";
 import * as PropTypes from "prop-types";
 import Colors from "../../constants/Colors";
 import color from 'color';
+import Fonts from "../../constants/Fonts";
 
 const ErrorElement = ({error}) =>
     (
         <View style={styles.item}>
-            <Text style={styles.action}>{error.action}</Text>
-            <Text>{error.message}</Text>
+            <Text style={styles.message}>{error.message}</Text>
         </View>
     );
 
@@ -26,9 +26,8 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
     },
-    action: {
-        fontSize: 18,
-        fontWeight: 'bold',
+    message: {
+        fontFamily: Fonts.normalFont,
     }
 });
 

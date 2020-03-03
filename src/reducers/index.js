@@ -5,6 +5,7 @@ import openHouseReducer, * as openHouses from './openHouses';
 import eventReducer, * as events from './events';
 import eateryReducer, * as eateries from './eateries';
 import plannerReducer, * as planner from './planner';
+import fetchReducer, * as fetch from "./fetch";
 
 export default {
     locations: locationReducer,
@@ -14,6 +15,7 @@ export default {
     eateries: eateryReducer,
     errors: errorReducer,
     planner: plannerReducer,
+    fetch: fetchReducer,
 };
 
 export const isLocationsLoaded = state => locations.isLoaded(state.locations);
@@ -57,3 +59,5 @@ export const getAllEventsInPlanner = state => planner.getAllEventsInPlanner(stat
 export const isVisitingOpenHouse = (state, openHouseID) => planner.isVisitingOpenHouse(state.planner, openHouseID);
 
 export const getNotificationID = (state, eventID)  => planner.getNotificationID(state.planner, eventID);
+
+export const isLoading = (state) => fetch.isLoading(state.fetch);

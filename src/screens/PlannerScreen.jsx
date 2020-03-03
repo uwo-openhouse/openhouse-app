@@ -1,11 +1,11 @@
 import React, {useState, useRef} from 'react';
 import {View, StyleSheet} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
-import ScheduleList from "../components/Schedule/ScheduleList";
 import AreaFilter from  "../components/AreaFilter";
 import * as PropTypes from "prop-types";
 import Toast from 'react-native-easy-toast';
 import Colors from "../constants/Colors";
+import ScheduleList from "../containers/Schedule/ScheduleList";
 
 //Note based off the Schedule Screen
 
@@ -22,7 +22,7 @@ const PlannerScreen = ({navigation, events, areas, eventsInPlanner}) => {
 
         return () => {unsubscribe.remove()};
     }, [navigation]);
-    
+
 
     return (
         <View style={styles.container}>
