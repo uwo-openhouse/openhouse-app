@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
 	ActionSheetIOS,
 	Picker,
@@ -12,14 +12,15 @@ import * as PropTypes from "prop-types";
 import Colors from "../constants/Colors";
 
 const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
-    if (Platform.OS == 'ios') {
-        const areaNames = areas.map(({name}) => {
+    const sortedAreas = areas.sort((a,b) => a.name.localeCompare(b.name));
+    if (Platform.OS === 'ios') {
+        const areaNames = sortedAreas.map(({name}) => {
             return name;
         });
         areaNames.unshift("Show All");
 
         return (
-            <Icon 
+            <Icon
             name="filter-list"
             size={30}
             color="#FFFFFF"
@@ -29,11 +30,11 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
                     options: areaNames,
                 },
                 (clicked) => {
-                    if (clicked == 0) {
+                    if (clicked === 0) {
                         setFilter(noFilterName);
                     }
                     else {
-                        setFilter(areas[clicked-1].uuid);
+                        setFilter(sortedAreas[clicked-1].uuid);
                     }
                 });
             }}
@@ -42,8 +43,8 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
     }
     else {
         return (
-            <View> 
-                <Icon 
+            <View>
+                <Icon
                     name="filter-list"
                     size={30}
                     color="#FFFFFF"
@@ -58,7 +59,7 @@ const AreaFilter = ({areas, filter, setFilter, noFilterName}) => {
                     onValueChange={(value) => setFilter(value)}
                 >
                     <Picker.Item value={noFilterName} label="Show All"/>
-                    {areas.map(({uuid, name, color}) => (
+                    {sortedAreas.map(({uuid, name, color}) => (
                         <Picker.Item color={color} key={`filter-area-${uuid}`} value={uuid} label={name}/>
                     ))}
                 </Picker>
@@ -92,5 +93,5 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 12,
         right: 10,
-     }, 
+     },
 });
