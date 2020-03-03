@@ -9,15 +9,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import AppNavigator from './src/navigation/AppNavigator';
 import {Provider} from "react-redux";
 import configureStore from "./src/configureStore";
-import {getEvents} from "./src/actions/events";
-import {getEateries} from "./src/actions/eateries";
-import {getAreas} from "./src/actions/areas";
-import {getLocations} from "./src/actions/locations";
-import {getOpenHouse, hasOpenHouse} from "./src/reducers";
-import {getOpenHouses} from "./src/actions/openHouses";
 import ErrorPopup from "./src/containers/Errors/ErrorPopup";
 import Loading from "./src/components/Loading";
 import Colors from "./src/constants/Colors";
+import {getAll} from "./src/actions";
 
 export default function App(props) {
     const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -32,18 +27,7 @@ export default function App(props) {
         );
     } else {
         const {store, persistor} = configureStore();
-        store.dispatch(getOpenHouses()).then(() => {
-            const state = store.getState();
-            let openHouseID = null;
-            if (hasOpenHouse(state)) {
-                openHouseID = getOpenHouse(state).uuid;
-            }
-            store.dispatch(getEvents(openHouseID));
-
-        });
-        store.dispatch(getLocations());
-        store.dispatch(getAreas());
-        store.dispatch(getEateries());
+        store.dispatch(getAll());
         return (
             <Provider store={store}>
                 <PersistGate loading={(<Loading/>)} persistor={persistor}>

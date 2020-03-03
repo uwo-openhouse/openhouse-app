@@ -3,13 +3,14 @@ import {
     StyleSheet,
     Text,
     SafeAreaView,
-    SectionList,
+    SectionList, RefreshControl,
 } from 'react-native';
 import * as PropTypes from 'prop-types';
 import moment from "moment";
 import {formatTime} from "../../service";
 import ScheduleItem from "../../containers/Schedule/ScheduleItem";
 import SectionListStyle from "../../constants/Styles";
+import Colors from "../../constants/Colors";
 
 const timeCompare = (time1, time2) => {
     const parsedTime1 = moment(time1, 'H:m');
@@ -24,7 +25,7 @@ const timeCompare = (time1, time2) => {
     return 0;
 };
 
-const ScheduleList = ({navigation, events, toast, eventsInPlanner, addToPlanner, removeFromPlanner}) => {
+const ScheduleList = ({navigation, events, toast, refreshing, onRefresh}) => {
     if (events.length === 0){
         return (<Text style={SectionListStyle.emptyListMsg}>No Events</Text>);
     }
@@ -46,14 +47,20 @@ const ScheduleList = ({navigation, events, toast, eventsInPlanner, addToPlanner,
             <SectionList
                 sections={eventData}
                 keyExtractor={(item, index) => item + index}
-                renderItem={({item}) => <ScheduleItem id={item.id} 
-                                                        navigation={navigation} 
+                renderItem={({item}) => <ScheduleItem id={item.id}
+                                                        navigation={navigation}
                                                         toast={toast}
                                                         event={item}
                                                         {...item} />}
                 renderSectionHeader={({section: {title}}) => (
                     <Text style={SectionListStyle.header}>{title}</Text>
                 )}
+                refreshControl={
+                    <RefreshControl
+                        tintColor={Colors.westernPurple}
+                        colors={[Colors.westernPurple]}
+                        refreshing={refreshing} onRefresh={onRefresh}
+                    />}
             />
         </SafeAreaView>
     );
@@ -72,6 +79,8 @@ ScheduleList.propTypes = {
             endTime: PropTypes.string.isRequired,
             room: PropTypes.string.isRequired,
         })).isRequired,
+    refreshing: PropTypes.bool.isRequired,
+    onRefresh: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

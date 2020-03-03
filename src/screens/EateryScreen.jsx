@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import CustomHeader from "../components/CustomHeader";
 import * as PropTypes from "prop-types";
-import EateryList from "../components/Eatery/EateryList";
 import Colors from "../constants/Colors";
+import EateryList from "../containers/Eatery/EaterList";
 
 const EateryScreen = ({navigation, eateries}) => {
     return (
