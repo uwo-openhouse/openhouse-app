@@ -31,11 +31,22 @@ const AboutScreen = ({navigation}) => (
                     icon={(<Icon iconStyle={styles.githubIcon} name='github' type="font-awesome" color="white"/>)}
                     onPress={() => Linking.openURL('https://github.com/uwo-openhouse')}
                 />
-                <Hyperlink linkDefault linkStyle={styles.link}>
-                    <Text style={[styles.text, styles.overLinedText, styles.paddedText, styles.lowerHeader]}>
-                        If you have any questions about becoming a Western student, please email welcome@uwo.ca.
-                    </Text>
-                </Hyperlink>
+                <View style={styles.paddedText}>
+                    <Hyperlink linkDefault linkStyle={styles.link}>
+                        <Text style={[styles.text, styles.overLinedText, styles.lowerHeader, styles.emailText]}>
+                            If you have any questions about becoming a Western student, please email welcome@uwo.ca.
+                        </Text>
+                    </Hyperlink>
+                    <Hyperlink
+                        linkDefault
+                        linkStyle={styles.link}
+                        linkText={ url => url === 'https://www.instagram.com/choosewesternu/' ? '@choosewesternu' : url }
+                    >
+                        <Text style={[styles.text]}>
+                            Don't want to miss anything? Follow along on Instagram at https://www.instagram.com/choosewesternu/.
+                        </Text>
+                    </Hyperlink>
+                </View>
             </View>
         </ScrollView>
     </View>
@@ -106,7 +117,9 @@ const styles = StyleSheet.create({
     body: {
         marginHorizontal: 16,
         height: Math.max(Dimensions.get("screen").height - 125, 500),
-    }
-});
+    },
+    emailText: {
+        paddingBottom: 10
+    }});
 
 export default AboutScreen

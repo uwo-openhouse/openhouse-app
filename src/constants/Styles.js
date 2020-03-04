@@ -64,15 +64,29 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     timeContainer: {
+        justifyContent: 'space-between',
         marginRight: 16,
     },
-
-    location: {
+    eateryLocation: {
         fontSize: 16,
         lineHeight: 18,
         fontFamily: Fonts.normalFont,
         color: '#666666',
         marginTop: 6,
+    },
+    area: {
+        fontSize: 14,
+        lineHeight: 16,
+        fontFamily: Fonts.normalFont,
+        color: '#666666',
+        marginTop: 3,
+    },
+    location: {
+        fontSize: 10,
+        lineHeight: 11,
+        fontFamily: Fonts.normalFont,
+        color: '#666666',
+        marginTop: 3,
     },
     categoryDot:{
         flexGrow: 0,
@@ -82,5 +96,9 @@ export default StyleSheet.create({
         width: 16,
         height: 16,
         borderRadius: 16/2,
+    },
+    titleGroup: {
+        flex: 1,
+        flexGrow: 1,
     },
 });
