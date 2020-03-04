@@ -6,7 +6,7 @@ import {addToPlanner, removeFromPlanner} from "../../actions/planner";
 
 const mapStateToProps = (state, { building, area, uuid }) => ({
     building: getLocation(state, building),
-    areaColor: getArea(state, area).color,
+    area: getArea(state, area),
     isInPlanner: eventIsInPlanner(state, uuid),
 });
 
