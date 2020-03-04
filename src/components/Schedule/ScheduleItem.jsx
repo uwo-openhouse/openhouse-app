@@ -11,7 +11,7 @@ import {formatTime} from "../../service";
 import StarIcon from "../StarIcon";
 
 const ScheduleItem = ({navigation, toast, isInPlanner, addToPlanner,  removeFromPlanner, event,
-                        name, room, areaColor, building, startTime, endTime, uuid}) =>  {
+                        name, room, area, building, startTime, endTime, uuid}) =>  {
     return (
         <View style={{marginVertical: 0}}>
             <TouchableHighlight underlayColor="black" onPress={()=> { navigation.navigate('EventDetails', {eventID: uuid});}}>
@@ -25,10 +25,15 @@ const ScheduleItem = ({navigation, toast, isInPlanner, addToPlanner,  removeFrom
 
                     <View style={ListItemStyle.itemContentContainer}>
                         <View style={ListItemStyle.titleContainer}>
-                            <View style={[ListItemStyle.categoryDot, {backgroundColor: areaColor}]}/>
-                            <Text style={ListItemStyle.title}>{name}</Text>
+                            <View style={[ListItemStyle.categoryDot, {backgroundColor: area.color}]}/>
+                            <View style={ListItemStyle.titleGroup}>
+                                <Text style={ListItemStyle.title}>{name}</Text>
+                                <Text style={ListItemStyle.area}>{area.name}</Text>
+                                <Text style={ListItemStyle.location}>{building.name} {room}</Text>
+                            </View>
+
                         </View>
-                        <Text style={ListItemStyle.location}>{building.name} {room}</Text>
+
                     </View>
                     <View style={ListItemStyle.scheduleIcon}>
                         <StarIcon toast={toast} isLightBackground={false} isInPlanner={isInPlanner} add={addToPlanner} remove={(e) => removeFromPlanner(e.uuid)} event={event} />
@@ -46,7 +51,11 @@ ScheduleItem.propTypes = {
     startTime: PropTypes.string.isRequired,
     endTime: PropTypes.string.isRequired,
     room: PropTypes.string.isRequired,
-    areaColor: PropTypes.string.isRequired,
+    area: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        uuid: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+    }).isRequired,
     building: PropTypes.shape({
         name: PropTypes.string.isRequired,
         position: PropTypes.shape({

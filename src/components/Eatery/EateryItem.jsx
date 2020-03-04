@@ -1,5 +1,4 @@
 import {
-    StyleSheet,
     Text,
     TouchableHighlight,
     View,
@@ -26,7 +25,7 @@ const EateryItem = ({navigation, name, building, openTime, closeTime, uuid}) => 
                         <View style={ListItemStyle.titleContainer}>
                             <Text style={ListItemStyle.title}>{name}</Text>
                         </View>
-                        <Text style={ListItemStyle.location}>{building.name}</Text>
+                        <Text style={ListItemStyle.eateryLocation}>{building.name}</Text>
                     </View>
 
                 </View>
