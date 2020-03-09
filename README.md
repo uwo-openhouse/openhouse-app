@@ -64,6 +64,8 @@ Replace `GOOGLE_MAPS_API_KEY_CHANGE_ME` in [the app.json](./app.json) with your 
 
     ii) If on windows download an android emulator (suggested: Android Virtual Device (AVD)) and click run on android emulator.
 
+    iii) The iOS version of the app can be tested using a machine running MacOS. Install Xcode for the iOS simulators and Android Studio for Android. 
+
 ## Creating a Release
 
 Make sure you increment the versions of `version`, `versionCode` and `buildNumber` in [the app.json](./app.json).
